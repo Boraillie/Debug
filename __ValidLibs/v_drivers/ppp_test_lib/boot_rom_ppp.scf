@@ -1,0 +1,23 @@
+LOAD_ROM 0x00000000                   ; this is a load region (single ROM instance)
+{
+  CODE +0 0x0C000                     ; CODE starts at 0 offset (max size = 0x0C000)
+  {
+    cstartup_ads.o (reset, +First)
+    ppp_code.o ( +RW )
+    * (+RO)
+  }
+
+  TTB0 0x0000C000 FIXED               ; MMU First level entry fixed address
+  {
+    ttb.o (+RO-DATA)
+  }
+
+}
+
+LOAD_RAM 0x00200000                   ; this is a load region (single RAM instance)
+{
+  DATA +0x40  0x00000FC0              ; AHB RAM0
+  {
+    * (+RW, +ZI)
+  }
+}

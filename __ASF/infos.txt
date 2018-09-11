@@ -1,0 +1,10 @@
+CMSIS lib files extract (+ERr updates for VDE compliance)
+-------------------------
+svn://rfolxts01.rfo.atmel.com/at91_software/projects/CMSIS/trunk/Device/ATMEL/sam4s
+Date : 24/04/2012
+-------------------------
+
+ASF extract
+-------------------------
+Date : 08/29/2011
+-------------------------

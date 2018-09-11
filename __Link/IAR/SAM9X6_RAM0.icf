@@ -1,0 +1,86 @@
+/**** start of ICF editor section. ###ICF###*/
+
+
+
+/*-Physical regions-****************************************/
+define symbol _region_SRAM_start__ = 0x00300000;
+define symbol _region_SRAM_size__  = 0x00010000;
+
+
+/*-Memory Regions-*/
+/*define symbol __ICFEDIT_region_SRAM0_start__   = 0x00300100;*/
+/*define symbol __ICFEDIT_region_SRAM0_end__     = 0x00310000;*/
+define symbol _INTVEC_size__ = 0x100;
+
+/**********************************************************/
+define symbol _region_MAX_CODE_size__  = 0x00007FE0;
+export symbol _region_MAX_CODE_size__;
+/*- _INTVEC_size__;*/
+define symbol _region_SRAM_BASE_size__ = 0x00010000;
+export symbol _region_SRAM_BASE_size__;
+/**********************************************************/
+define symbol _region_SRAM_CODE_start__ = _region_SRAM_start__;
+/*+ _INTVEC_size__;*/
+define symbol _region_SRAM_CODE_size__ 	= _region_MAX_CODE_size__;
+define symbol _region_SRAM_BASE_start__ = _region_SRAM_start__;
+define symbol _region_SRAM_RW_start__   = _region_SRAM_CODE_start__+_region_MAX_CODE_size__;
+define symbol _region_SRAM_RW_size__    = _region_SRAM_BASE_size__-_region_MAX_CODE_size__;
+define symbol _region_SRAM_EXT_start__  = _region_SRAM_RW_start__+_region_SRAM_RW_size__;
+define symbol _region_SRAM_EXT_size__   = _region_SRAM_size__-_region_SRAM_BASE_size__;
+/*****************************************************************************/
+define memory mem with size = 4G;
+define region SRAM  = mem:[from _region_SRAM_start__  size _region_SRAM_size__];
+define region SRAM_CODE = mem:[from _region_SRAM_CODE_start__  size _region_SRAM_CODE_size__];
+define region SRAM_RW   = mem:[from _region_SRAM_RW_start__  size _region_SRAM_RW_size__];
+define region SRAM_BASE = mem:[from _region_SRAM_BASE_start__  size _region_SRAM_BASE_size__];
+define region SRAM_EXT  = mem:[from _region_SRAM_EXT_start__ size _region_SRAM_EXT_size__];
+/*define region SRAM0  = mem:[from __ICFEDIT_region_SRAM0_start__ to __ICFEDIT_region_SRAM0_end__];*/
+/*****************************************************************************/
+
+/*-Sizes-*/
+define symbol __ICFEDIT_size_cstack__   = 0x1000;
+define symbol __ICFEDIT_size_svcstack__ = 0x40;
+define symbol __ICFEDIT_size_irqstack__ = 0x400;
+//define symbol __ICFEDIT_size_fiqstack__ = 0x40;
+define symbol __ICFEDIT_size_fiqstack__ = 0x100;
+define symbol __ICFEDIT_size_undstack__ = 0x40;
+define symbol __ICFEDIT_size_abtstack__ = 0x40;
+define symbol __ICFEDIT_size_heap__     = 0x400;
+
+/**** End of ICF editor section. ###ICF###*/
+
+
+/*-binary infos-*/
+define symbol _info_add__ = _region_SRAM_CODE_start__+_region_SRAM_CODE_size__;
+place at address mem:_info_add__ { ro section .info_section };
+
+/*-checksum-*/
+define symbol _checksum_add__ = _region_SRAM_CODE_start__+_region_SRAM_CODE_size__+0x1C;
+export symbol _checksum_add__;
+place at address mem:_checksum_add__ { ro section .checksum };
+
+
+define block CSTACK    with alignment = 8, size = __ICFEDIT_size_cstack__   { };
+define block SVC_STACK with alignment = 8, size = __ICFEDIT_size_svcstack__ { };
+define block IRQ_STACK with alignment = 8, size = __ICFEDIT_size_irqstack__ { };
+define block FIQ_STACK with alignment = 8, size = __ICFEDIT_size_fiqstack__ { };
+define block UND_STACK with alignment = 8, size = __ICFEDIT_size_undstack__ { };
+define block ABT_STACK with alignment = 8, size = __ICFEDIT_size_abtstack__ { };
+define block HEAP      with alignment = 8, size = __ICFEDIT_size_heap__     { };
+
+
+/*-Specials-*/
+define symbol __ICFEDIT_intvec_start__ = _region_SRAM_start__;
+
+initialize by copy { readwrite };
+do not initialize  { section .noinit };
+
+place at address mem:__ICFEDIT_intvec_start__    { readonly section .intvec };
+
+place in SRAM_CODE { readonly };
+place in SRAM_RW   { readwrite,
+                     block CSTACK, block SVC_STACK, block IRQ_STACK, block FIQ_STACK,
+                     block UND_STACK, block ABT_STACK, block HEAP };
+
+
+

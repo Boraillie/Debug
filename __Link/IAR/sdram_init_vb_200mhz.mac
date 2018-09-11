@@ -1,0 +1,257 @@
+/*********************************************************************
+*                              Microchip                             *
+**********************************************************************
+*                                                                    *
+*       (C)  2017   Microchip   Jpp                            *
+*                                                                    *
+*                                                                    *
+**********************************************************************
+
+----------------------------------------------------------------------
+File    : 
+SDRAM initialisation :  SDRAM Type: Alliance AS4C4M16SA-5TCN (PC200)
+
+--------  END-OF-HEADER  ---------------------------------------------
+ step __speed value
+
+*/
+
+__var __speed;
+__var __mac_i;
+
+pllsetting()
+
+{
+  __writeMemory32(0x0100FF29,0x4000C020,"Memory")      ; // MOR 	switch to main clk 
+  __writeMemory32(0x00000001,0x4000C030,"Memory")      ; //MCKR   
+  __writeMemory32(0x20073F00,0x4000C028,"Memory")      ; // PLLAR	from x21041001   to 0x218C3F01   
+  __writeMemory32(0x20073F01,0x4000C028,"Memory")      ; // PLLAR	from x21041001   to 0x218C3F01 
+  __writeMemory32(0x00000002,0x4000C030,"Memory")   ;      
+
+}
+
+io_configure()
+{
+//PIOA base address 0x40008000
+
+  
+//// periph A
+// data lines:
+// PC27 D0, PC28 D1, PC29 D2, PC30 D3, PC31 D4  
+// data lines:
+// PD0 D5, PD1 D6, PD2 D7, PD3 D8, PD4 D9, PD5 D10, PD6 D11, PD7 D12, PD8 D13, PD9 D14, PD10 D15,
+// Adresses:
+// PD11 A2, PD12 A3, PD13 A4, PD14 A5, PD15 A6, PD16 A7, PD17 A8, PD18 A9, PD19 A10, PD20 SDA10, PD21 A11, PD22 A13, PD23 A14,
+// PD25 SDCK, PD26 SDCKE, PD27 SDWE, PD28 BA0, PD29 BA1, PD30 RAS, PD31 CAS
+// Not used PD24 A15, 
+// PE0 SDCS0 
+// PE1 SDCS1
+// PE2 A0: NBS0
+// PE3 NBS1 
+  __writeMemory32(0xF8000000,0x40008080,"Memory")      ; // PIO msk set   PIO_MSKR
+  __writeMemory32(0x00000001,0x40008084,"Memory")      ; // PIO cfg set   PIO_CFGR
+  __writeMemory32(0xFEFFFFFF,0x400080C0,"Memory")      ; // PIO msk set   PIO_MSKR
+  __writeMemory32(0x00000001,0x400080C4,"Memory")      ; // PIO cfg set   PIO_CFGR
+  __writeMemory32(0x0000000F,0x40008100,"Memory")      ; // PIO msk set   PIO_MSKR
+  __writeMemory32(0x00000001,0x40008104,"Memory")      ; // PIO cfg set   PIO_CFGR
+}
+
+
+CoreStatus()
+{
+//   __message " ----PMC_SCER_DDRCK (0x1u << 2))  0x0000 00040 /**< \brief DDR Clock  ";
+//   // PMC: 0x4000C000U
+//  __mac_i=__readMemory32(0xF0014008,"Memory");
+//  __message " ---------------------------------------- PMC_SCSR   0x",__mac_i:%X;  
+//  __mac_i=__readMemory32(0xF0014020,"Memory");
+//  __message " ---------------------------------------- PMC_MOR    0x",__mac_i:%X;  
+//  __mac_i=__readMemory32(0xF0014028,"Memory");
+//  __message " ---------------------------------------- PMC_PLLAR  0x",__mac_i:%X;  
+//  __mac_i=__readMemory32(0xF0014030,"Memory");
+//  __message " ---------------------------------------- PMC_MCKR  0x",__mac_i:%X;
+//  
+//  __message " ----ID_MPDDRC      (13) 0x0000 2000/**< \brief MPDDR controller (MPDDRC) ";
+//  __mac_i=__readMemory32(0xF0014018,"Memory");
+//  __message " ---------------------------------------- PMC_PCSR0  0x",__mac_i:%X; 
+//  __mac_i=__readMemory32(0xF0014108,"Memory");
+//  __message " ---------------------------------------- PMC_PCSR1  0x",__mac_i:%X; 
+  
+}
+
+
+
+
+
+Configure_SDRAM(__speed)
+{
+
+
+    __message " =======  Macro SDRAM Init :  SDRAM Type: Alliance AS4C4M16SA-5TCN (PC200) up to 200MHz. VB revA limitaion mck < 80Mhz"; 
+
+
+    //Set Cs to 0 SFR->SFR_EBICFG |= (1<<8); 
+    __writeMemory32(0x00000100,0x400D0040,"Memory");
+    //set sdramc clock PMC_PCR = 0x44
+    __writeMemory32(0x10001044,0x4000C10C,"Memory");
+    //Read it back
+    __writeMemory32(0x00000044,0x4000C10C,"Memory");
+    __mac_i=__readMemory32(0x4000C10C,"Memory");
+    __message " ---------------------------------------- PMC_PCR  0x",__mac_i:%X; 
+
+    
+
+    /* 1. SDRAM features must be set in the configuration register:
+    asynchronous timings (TRC, TRAS, etc.), number of columns, rows,
+    CAS latency, and the data bus width. */
+
+    //sdram_pt->SDRAMC_CR = 0xF955D5F4;  // Offset: 0x08
+    __writeMemory32(0xF955D5F4,0x40084008U,"Memory");
+
+    //sdram_pt->SDRAMC_CFR1 |= 0x00000100;  // offset 0x28
+    __writeMemory32(0x00000102,0x40084028U,"Memory");
+
+    /* 2. For mobile SDRAM, temperature-compensated self refresh (TCSR), drive
+    strength (DS) and partial array self refresh (PASR) must be set in the
+    Low Power Register. */
+
+    /* 3. The SDRAM memory type must be set in the Memory Device Register.*/
+    //sdram_pt->SDRAMC_MDR = 0x00000000;  // (Sdramc Offset: 0x24)
+    __writeMemory32(0x00000000,0x40084024U,"Memory");
+
+    /* 4. A minimum pause of 200 ¦Ìs is provided to precede any signal toggle.*/
+    //for (i = 0; i < 100000; i++);
+    __message " ======= WAIT ======="; 
+
+    /* 5. (1)A NOP command is issued to the SDRAM devices. The application must
+    set Mode to 1 in the Mode Register and perform a write access to
+    any SDRAM address.*/
+    //sdram_pt->SDRAMC_MR = 0x00000001;  // (Sdramc Offset: 0x00)
+    __writeMemory32(0x00000001,0x40084000U,"Memory");
+    __readMemory32(0x70000000u,"Memory");
+
+    //for (i = 0; i < 100000; i++);
+    __message " ======= WAIT ======="; 
+
+    /* 6. An All Banks Precharge command is issued to the SDRAM devices.
+    The application must set Mode to 2 in the Mode Register and perform a write
+    access to any SDRAM address. */
+    //sdram_pt->SDRAMC_MR = 0x00000002;  // (Sdramc Offset: 0x00)
+    __writeMemory32(0x00000002,0x40084000U,"Memory");
+    __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+
+    //for (i = 0; i < 100000; i++);
+    __message " ======= WAIT ======="; 
+
+    /* 7. Eight auto-refresh (CBR) cycles are provided. The application must
+    set the Mode to 4 in the Mode Register and perform a write access to any
+    SDRAM location eight times.*/
+//    for (i = 0; i < 8; i++) {
+            //sdram_pt->SDRAMC_MR = 0x00000004;  // (Sdramc Offset: 0x00)
+            __writeMemory32(0x00000004,0x40084000U,"Memory");
+            __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+            __writeMemory32(0x00000004,0x40084000U,"Memory");
+            __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+            __writeMemory32(0x00000004,0x40084000U,"Memory");
+            __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+            __writeMemory32(0x00000004,0x40084000U,"Memory");
+            __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+            __writeMemory32(0x00000004,0x40084000U,"Memory");
+            __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+            __writeMemory32(0x00000004,0x40084000U,"Memory");
+            __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+            __writeMemory32(0x00000004,0x40084000U,"Memory");
+            __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+            __writeMemory32(0x00000004,0x40084000U,"Memory");
+            __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+//    }
+
+    //for (i = 0; i < 100000; i++);
+    __message " ======= WAIT ======="; 
+
+    /*8. A Mode Register set (MRS) cycle is issued to program the parameters of
+    the SDRAM devices, in particular CAS latency and burst length. The
+    application must set Mode to 3 in the Mode Register and perform a write
+    access to the SDRAM. The write address must be chosen so that BA[1:0]
+    are set to 0. For example, with a 16-bit 128 MB SDRAM (12 rows, 9 columns,
+    4 banks) bank address, the SDRAM write access should be done at the address
+    0x70000000.*/
+    //sdram_pt->SDRAMC_MR = 0x00000003;  // (Sdramc Offset: 0x00)
+    __writeMemory32(0x00000003,0x40084000U,"Memory");
+    __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+
+    //for (i = 0; i < 100000; i++);
+    __message " ======= WAIT ======="; 
+
+    /*9. For mobile SDRAM initialization, an Extended Mode Register set (EMRS)
+    cycle is issued to program the SDRAM parameters (TCSR, PASR, DS). The
+    application must set Mode to 5 in the Mode Register and perform a write
+    access to the SDRAM. The write address must be chosen so that BA[1] or BA[0]
+    are set to 1.
+    For example, with a 16-bit 128 MB SDRAM, (12 rows, 9 columns, 4 banks) bank
+    address the SDRAM write access should be done at the address 0x70800000 or
+    0x70400000. */
+    //sdram_pt->SDRAMC_MR = SDRAMC_MR_MODE_EXT_LOAD_MODEREG;
+    // *((uint8_t *)(pSdram + SDRAM_BA0)) = 0;
+
+    /* 10. The application must go into Normal Mode, setting Mode to 0 in the
+    Mode Register and performing a write access at any location in the SDRAM. */
+    //sdram_pt->SDRAMC_MR = 0x00000000;  // (Sdramc Offset: 0x00)
+    __writeMemory32(0x00000000,0x40084000U,"Memory");
+    __readMemory32(0x70000000u,"Memory");  //    *pSdram = 0;
+
+    //for (i = 0; i < 100000; i++);
+    __message " ======= WAIT ======="; 
+
+    /* 11. Write the refresh rate into the count field in the sdram_pt Refresh
+    Timer register. (Refresh rate = delay between refresh cycles).
+    The SDRAM device requires a refresh every 15.625 ¦Ìs or 7.81 ¦Ìs.
+    With a 100 MHz frequency, the Refresh Timer Counter Register must be set
+    with the value 1562(15.625 ¦Ìs x 100 MHz) or 781(7.81 ¦Ìs x 100 MHz). */
+    // For IS42S16100E, 2048 refresh cycle every 32ms, every 15.625 ¦Ìs
+    /* ((32 x 10(^-3))/2048) x150 x (10^6) */
+    //sdram_pt->SDRAMC_TR = 1562;  // test   // (Sdramc Offset: 0x04)
+    __writeMemory32(1562,0x40084004U,"Memory");
+    //sdram_pt->SDRAMC_TR = 1562;  // 100MHz
+    //sdram_pt->SDRAMC_TR = 390; // 25MHz
+
+    __message " =======  End of Macro SDRAM Init";
+}
+
+/*********************************************************************
+*
+*       execUserReset()
+*/
+execUserReset() {
+  __message "----------- SDRAM init : execUserReset()";  
+    CoreStatus();
+}
+
+/*********************************************************************
+*
+*       execUserPreload()
+*/
+execUserPreload() {
+  __message "----------- SDRAM init macro file execution : execUserPreload()";
+   __speed = 100;
+   CoreStatus();
+//TODO skip sdram init if already done
+//     __mac_i =__readMemory32(0xF000C034,"Memory");
+//     __mac_i = __mac_i & 0x4;   
+//  if ( __mac_i == 0x0 )  
+//     {
+//Unprotect PMC 	
+    __writeMemory32(0x504D4300,0x4000C0E4,"Memory");
+//
+          pllsetting();
+	  io_configure();
+          Configure_SDRAM(__speed);
+          CoreStatus();
+//     } 
+//     else
+//     {
+//       __message "----------- DDR2 initilization already DONE";
+ //         
+  //   }
+}
+
+/**************** End of file ***************************************/

@@ -1,0 +1,596 @@
+
+ppp.lo:     file format elf32-avr
+
+
+Disassembly of section .text:
+
+00008000 <initcode-0xe0>:
+    8000:	6f c0       	rjmp	.+222    	; 0x80e0 <initcode>
+    8002:	00 00       	nop
+    8004:	9c 81       	ldd	r25, Y+4	; 0x04
+    8006:	00 00       	nop
+    8008:	3a 86       	std	Y+10, r3	; 0x0a
+    800a:	00 00       	nop
+    800c:	1a 86       	std	Y+10, r1	; 0x0a
+    800e:	00 00       	nop
+    8010:	70 84       	ldd	r7, Z+8	; 0x08
+    8012:	00 00       	nop
+    8014:	9c 81       	ldd	r25, Y+4	; 0x04
+	...
+
+000080e0 <initcode>:
+    80e0:	0f ef       	ldi	r16, 0xFF	; 255
+    80e2:	1f eb       	ldi	r17, 0xBF	; 191
+    80e4:	0d bf       	out	0x3d, r16	; 61
+    80e6:	1e bf       	out	0x3e, r17	; 62
+
+000080e8 <picop>:
+    80e8:	cf 93       	push	r28
+    80ea:	df 93       	push	r29
+    80ec:	cd b7       	in	r28, 0x3d	; 61
+    80ee:	de b7       	in	r29, 0x3e	; 62
+    80f0:	80 e0       	ldi	r24, 0x00	; 0
+    80f2:	90 ec       	ldi	r25, 0xC0	; 192
+    80f4:	80 93 65 86 	sts	0x8665, r24
+    80f8:	90 93 66 86 	sts	0x8666, r25
+    80fc:	82 e0       	ldi	r24, 0x02	; 2
+    80fe:	90 ec       	ldi	r25, 0xC0	; 192
+    8100:	80 93 5f 86 	sts	0x865F, r24
+    8104:	90 93 60 86 	sts	0x8660, r25
+    8108:	84 e0       	ldi	r24, 0x04	; 4
+    810a:	90 ec       	ldi	r25, 0xC0	; 192
+    810c:	80 93 61 86 	sts	0x8661, r24
+    8110:	90 93 62 86 	sts	0x8662, r25
+    8114:	88 e0       	ldi	r24, 0x08	; 8
+    8116:	90 ec       	ldi	r25, 0xC0	; 192
+    8118:	80 93 58 86 	sts	0x8658, r24
+    811c:	90 93 59 86 	sts	0x8659, r25
+    8120:	8a e0       	ldi	r24, 0x0A	; 10
+    8122:	90 ec       	ldi	r25, 0xC0	; 192
+    8124:	80 93 5b 86 	sts	0x865B, r24
+    8128:	90 93 5c 86 	sts	0x865C, r25
+    812c:	80 e2       	ldi	r24, 0x20	; 32
+    812e:	90 ec       	ldi	r25, 0xC0	; 192
+    8130:	80 93 56 86 	sts	0x8656, r24
+    8134:	90 93 57 86 	sts	0x8657, r25
+    8138:	80 91 56 86 	lds	r24, 0x8656
+    813c:	90 91 57 86 	lds	r25, 0x8657
+    8140:	80 93 63 86 	sts	0x8663, r24
+    8144:	90 93 64 86 	sts	0x8664, r25
+    8148:	8d e8       	ldi	r24, 0x8D	; 141
+    814a:	90 e0       	ldi	r25, 0x00	; 0
+    814c:	0e 94 e1 90 	call	0x121c2	; 0x121c2 <AVR16_WriteCTRL16>
+    8150:	80 e2       	ldi	r24, 0x20	; 32
+    8152:	92 e0       	ldi	r25, 0x02	; 2
+    8154:	fc 01       	movw	r30, r24
+    8156:	25 81       	ldd	r18, Z+5	; 0x05
+    8158:	20 7f       	andi	r18, 0xF0	; 240
+    815a:	21 60       	ori	r18, 0x01	; 1
+    815c:	fc 01       	movw	r30, r24
+    815e:	25 83       	std	Z+5, r18	; 0x05
+    8160:	10 92 5d 86 	sts	0x865D, r1
+    8164:	10 92 5e 86 	sts	0x865E, r1
+    8168:	80 91 5b 86 	lds	r24, 0x865B
+    816c:	90 91 5c 86 	lds	r25, 0x865C
+    8170:	fc 01       	movw	r30, r24
+    8172:	10 82       	st	Z, r1
+    8174:	11 82       	std	Z+1, r1	; 0x01
+    8176:	10 92 5a 86 	sts	0x865A, r1
+    817a:	80 91 5a 86 	lds	r24, 0x865A
+    817e:	88 23       	and	r24, r24
+    8180:	61 f0       	breq	.+24     	; 0x819a <picop+0xb2>
+    8182:	80 ea       	ldi	r24, 0xA0	; 160
+    8184:	93 e0       	ldi	r25, 0x03	; 3
+    8186:	21 e0       	ldi	r18, 0x01	; 1
+    8188:	fc 01       	movw	r30, r24
+    818a:	20 83       	st	Z, r18
+    818c:	10 92 5a 86 	sts	0x865A, r1
+    8190:	8d e8       	ldi	r24, 0x8D	; 141
+    8192:	92 e0       	ldi	r25, 0x02	; 2
+    8194:	0e 94 e1 90 	call	0x121c2	; 0x121c2 <AVR16_WriteCTRL16>
+    8198:	f0 cf       	rjmp	.-32     	; 0x817a <picop+0x92>
+    819a:	ef cf       	rjmp	.-34     	; 0x817a <picop+0x92>
+
+0000819c <ISR_HF>:
+    819c:	00 d0       	rcall	.+0      	; 0x819e <ISR_HF+0x2>
+    819e:	cd b7       	in	r28, 0x3d	; 61
+    81a0:	de b7       	in	r29, 0x3e	; 62
+    81a2:	89 83       	std	Y+1, r24	; 0x01
+    81a4:	9a 83       	std	Y+2, r25	; 0x02
+    81a6:	80 e2       	ldi	r24, 0x20	; 32
+    81a8:	92 e0       	ldi	r25, 0x02	; 2
+    81aa:	21 e0       	ldi	r18, 0x01	; 1
+    81ac:	fc 01       	movw	r30, r24
+    81ae:	26 87       	std	Z+14, r18	; 0x0e
+    81b0:	80 91 65 86 	lds	r24, 0x8665
+    81b4:	90 91 66 86 	lds	r25, 0x8666
+    81b8:	fc 01       	movw	r30, r24
+    81ba:	80 81       	ld	r24, Z
+    81bc:	88 2f       	mov	r24, r24
+    81be:	90 e0       	ldi	r25, 0x00	; 0
+    81c0:	86 30       	cpi	r24, 0x06	; 6
+    81c2:	91 05       	cpc	r25, r1
+    81c4:	09 f4       	brne	.+2      	; 0x81c8 <ISR_HF+0x2c>
+    81c6:	a1 c0       	rjmp	.+322    	; 0x830a <ISR_HF+0x16e>
+    81c8:	87 30       	cpi	r24, 0x07	; 7
+    81ca:	91 05       	cpc	r25, r1
+    81cc:	b4 f4       	brge	.+44     	; 0x81fa <ISR_HF+0x5e>
+    81ce:	82 30       	cpi	r24, 0x02	; 2
+    81d0:	91 05       	cpc	r25, r1
+    81d2:	09 f4       	brne	.+2      	; 0x81d6 <ISR_HF+0x3a>
+    81d4:	56 c0       	rjmp	.+172    	; 0x8282 <ISR_HF+0xe6>
+    81d6:	83 30       	cpi	r24, 0x03	; 3
+    81d8:	91 05       	cpc	r25, r1
+    81da:	34 f4       	brge	.+12     	; 0x81e8 <ISR_HF+0x4c>
+    81dc:	00 97       	sbiw	r24, 0x00	; 0
+    81de:	31 f1       	breq	.+76     	; 0x822c <ISR_HF+0x90>
+    81e0:	81 30       	cpi	r24, 0x01	; 1
+    81e2:	91 05       	cpc	r25, r1
+    81e4:	c9 f1       	breq	.+114    	; 0x8258 <ISR_HF+0xbc>
+    81e6:	3b c1       	rjmp	.+630    	; 0x845e <ISR_HF+0x2c2>
+    81e8:	84 30       	cpi	r24, 0x04	; 4
+    81ea:	91 05       	cpc	r25, r1
+    81ec:	09 f4       	brne	.+2      	; 0x81f0 <ISR_HF+0x54>
+    81ee:	5f c0       	rjmp	.+190    	; 0x82ae <ISR_HF+0x112>
+    81f0:	85 30       	cpi	r24, 0x05	; 5
+    81f2:	91 05       	cpc	r25, r1
+    81f4:	09 f4       	brne	.+2      	; 0x81f8 <ISR_HF+0x5c>
+    81f6:	72 c0       	rjmp	.+228    	; 0x82dc <ISR_HF+0x140>
+    81f8:	32 c1       	rjmp	.+612    	; 0x845e <ISR_HF+0x2c2>
+    81fa:	8d 30       	cpi	r24, 0x0D	; 13
+    81fc:	91 05       	cpc	r25, r1
+    81fe:	09 f4       	brne	.+2      	; 0x8202 <ISR_HF+0x66>
+    8200:	de c0       	rjmp	.+444    	; 0x83be <ISR_HF+0x222>
+    8202:	8e 30       	cpi	r24, 0x0E	; 14
+    8204:	91 05       	cpc	r25, r1
+    8206:	4c f4       	brge	.+18     	; 0x821a <ISR_HF+0x7e>
+    8208:	88 30       	cpi	r24, 0x08	; 8
+    820a:	91 05       	cpc	r25, r1
+    820c:	09 f4       	brne	.+2      	; 0x8210 <ISR_HF+0x74>
+    820e:	aa c0       	rjmp	.+340    	; 0x8364 <ISR_HF+0x1c8>
+    8210:	8c 30       	cpi	r24, 0x0C	; 12
+    8212:	91 05       	cpc	r25, r1
+    8214:	09 f4       	brne	.+2      	; 0x8218 <ISR_HF+0x7c>
+    8216:	b4 c0       	rjmp	.+360    	; 0x8380 <ISR_HF+0x1e4>
+    8218:	22 c1       	rjmp	.+580    	; 0x845e <ISR_HF+0x2c2>
+    821a:	8e 30       	cpi	r24, 0x0E	; 14
+    821c:	91 05       	cpc	r25, r1
+    821e:	09 f4       	brne	.+2      	; 0x8222 <ISR_HF+0x86>
+    8220:	04 c1       	rjmp	.+520    	; 0x842a <ISR_HF+0x28e>
+    8222:	80 31       	cpi	r24, 0x10	; 16
+    8224:	91 05       	cpc	r25, r1
+    8226:	09 f4       	brne	.+2      	; 0x822a <ISR_HF+0x8e>
+    8228:	16 c1       	rjmp	.+556    	; 0x8456 <ISR_HF+0x2ba>
+    822a:	19 c1       	rjmp	.+562    	; 0x845e <ISR_HF+0x2c2>
+    822c:	80 91 61 86 	lds	r24, 0x8661
+    8230:	90 91 62 86 	lds	r25, 0x8662
+    8234:	fc 01       	movw	r30, r24
+    8236:	80 81       	ld	r24, Z
+    8238:	91 81       	ldd	r25, Z+1	; 0x01
+    823a:	a2 81       	ldd	r26, Z+2	; 0x02
+    823c:	b3 81       	ldd	r27, Z+3	; 0x03
+    823e:	28 2f       	mov	r18, r24
+    8240:	30 e0       	ldi	r19, 0x00	; 0
+    8242:	80 91 5f 86 	lds	r24, 0x865F
+    8246:	90 91 60 86 	lds	r25, 0x8660
+    824a:	fc 01       	movw	r30, r24
+    824c:	80 81       	ld	r24, Z
+    824e:	91 81       	ldd	r25, Z+1	; 0x01
+    8250:	b9 01       	movw	r22, r18
+    8252:	0e 94 5b 8c 	call	0x118b6	; 0x118b6 <AVR16_WriteMemory8>
+    8256:	03 c1       	rjmp	.+518    	; 0x845e <ISR_HF+0x2c2>
+    8258:	80 91 61 86 	lds	r24, 0x8661
+    825c:	90 91 62 86 	lds	r25, 0x8662
+    8260:	fc 01       	movw	r30, r24
+    8262:	80 81       	ld	r24, Z
+    8264:	91 81       	ldd	r25, Z+1	; 0x01
+    8266:	a2 81       	ldd	r26, Z+2	; 0x02
+    8268:	b3 81       	ldd	r27, Z+3	; 0x03
+    826a:	9c 01       	movw	r18, r24
+    826c:	80 91 5f 86 	lds	r24, 0x865F
+    8270:	90 91 60 86 	lds	r25, 0x8660
+    8274:	fc 01       	movw	r30, r24
+    8276:	80 81       	ld	r24, Z
+    8278:	91 81       	ldd	r25, Z+1	; 0x01
+    827a:	b9 01       	movw	r22, r18
+    827c:	0e 94 5a 8c 	call	0x118b4	; 0x118b4 <AVR16_WriteMemory16>
+    8280:	ee c0       	rjmp	.+476    	; 0x845e <ISR_HF+0x2c2>
+    8282:	80 91 61 86 	lds	r24, 0x8661
+    8286:	90 91 62 86 	lds	r25, 0x8662
+    828a:	fc 01       	movw	r30, r24
+    828c:	80 81       	ld	r24, Z
+    828e:	91 81       	ldd	r25, Z+1	; 0x01
+    8290:	a2 81       	ldd	r26, Z+2	; 0x02
+    8292:	b3 81       	ldd	r27, Z+3	; 0x03
+    8294:	20 91 5f 86 	lds	r18, 0x865F
+    8298:	30 91 60 86 	lds	r19, 0x8660
+    829c:	f9 01       	movw	r30, r18
+    829e:	20 81       	ld	r18, Z
+    82a0:	31 81       	ldd	r19, Z+1	; 0x01
+    82a2:	ac 01       	movw	r20, r24
+    82a4:	bd 01       	movw	r22, r26
+    82a6:	c9 01       	movw	r24, r18
+    82a8:	0e 94 56 8c 	call	0x118ac	; 0x118ac <AVR16_WriteMemory32>
+    82ac:	d8 c0       	rjmp	.+432    	; 0x845e <ISR_HF+0x2c2>
+    82ae:	00 91 61 86 	lds	r16, 0x8661
+    82b2:	10 91 62 86 	lds	r17, 0x8662
+    82b6:	80 91 5f 86 	lds	r24, 0x865F
+    82ba:	90 91 60 86 	lds	r25, 0x8660
+    82be:	fc 01       	movw	r30, r24
+    82c0:	80 81       	ld	r24, Z
+    82c2:	91 81       	ldd	r25, Z+1	; 0x01
+    82c4:	0e 94 61 8c 	call	0x118c2	; 0x118c2 <AVR16_ReadMemory8>
+    82c8:	aa 27       	eor	r26, r26
+    82ca:	97 fd       	sbrc	r25, 7
+    82cc:	a0 95       	com	r26
+    82ce:	ba 2f       	mov	r27, r26
+    82d0:	f8 01       	movw	r30, r16
+    82d2:	80 83       	st	Z, r24
+    82d4:	91 83       	std	Z+1, r25	; 0x01
+    82d6:	a2 83       	std	Z+2, r26	; 0x02
+    82d8:	b3 83       	std	Z+3, r27	; 0x03
+    82da:	c1 c0       	rjmp	.+386    	; 0x845e <ISR_HF+0x2c2>
+    82dc:	00 91 61 86 	lds	r16, 0x8661
+    82e0:	10 91 62 86 	lds	r17, 0x8662
+    82e4:	80 91 5f 86 	lds	r24, 0x865F
+    82e8:	90 91 60 86 	lds	r25, 0x8660
+    82ec:	fc 01       	movw	r30, r24
+    82ee:	80 81       	ld	r24, Z
+    82f0:	91 81       	ldd	r25, Z+1	; 0x01
+    82f2:	0e 94 60 8c 	call	0x118c0	; 0x118c0 <AVR16_ReadMemory16>
+    82f6:	aa 27       	eor	r26, r26
+    82f8:	97 fd       	sbrc	r25, 7
+    82fa:	a0 95       	com	r26
+    82fc:	ba 2f       	mov	r27, r26
+    82fe:	f8 01       	movw	r30, r16
+    8300:	80 83       	st	Z, r24
+    8302:	91 83       	std	Z+1, r25	; 0x01
+    8304:	a2 83       	std	Z+2, r26	; 0x02
+    8306:	b3 83       	std	Z+3, r27	; 0x03
+    8308:	aa c0       	rjmp	.+340    	; 0x845e <ISR_HF+0x2c2>
+    830a:	00 91 61 86 	lds	r16, 0x8661
+    830e:	10 91 62 86 	lds	r17, 0x8662
+    8312:	80 91 5f 86 	lds	r24, 0x865F
+    8316:	90 91 60 86 	lds	r25, 0x8660
+    831a:	fc 01       	movw	r30, r24
+    831c:	80 81       	ld	r24, Z
+    831e:	91 81       	ldd	r25, Z+1	; 0x01
+    8320:	0e 94 60 8c 	call	0x118c0	; 0x118c0 <AVR16_ReadMemory16>
+    8324:	6c 01       	movw	r12, r24
+    8326:	ee 24       	eor	r14, r14
+    8328:	d7 fc       	sbrc	r13, 7
+    832a:	e0 94       	com	r14
+    832c:	fe 2c       	mov	r15, r14
+    832e:	80 91 5f 86 	lds	r24, 0x865F
+    8332:	90 91 60 86 	lds	r25, 0x8660
+    8336:	fc 01       	movw	r30, r24
+    8338:	80 81       	ld	r24, Z
+    833a:	91 81       	ldd	r25, Z+1	; 0x01
+    833c:	02 96       	adiw	r24, 0x02	; 2
+    833e:	0e 94 60 8c 	call	0x118c0	; 0x118c0 <AVR16_ReadMemory16>
+    8342:	aa 27       	eor	r26, r26
+    8344:	97 fd       	sbrc	r25, 7
+    8346:	a0 95       	com	r26
+    8348:	ba 2f       	mov	r27, r26
+    834a:	dc 01       	movw	r26, r24
+    834c:	99 27       	eor	r25, r25
+    834e:	88 27       	eor	r24, r24
+    8350:	8c 29       	or	r24, r12
+    8352:	9d 29       	or	r25, r13
+    8354:	ae 29       	or	r26, r14
+    8356:	bf 29       	or	r27, r15
+    8358:	f8 01       	movw	r30, r16
+    835a:	80 83       	st	Z, r24
+    835c:	91 83       	std	Z+1, r25	; 0x01
+    835e:	a2 83       	std	Z+2, r26	; 0x02
+    8360:	b3 83       	std	Z+3, r27	; 0x03
+    8362:	7d c0       	rjmp	.+250    	; 0x845e <ISR_HF+0x2c2>
+    8364:	20 91 61 86 	lds	r18, 0x8661
+    8368:	30 91 62 86 	lds	r19, 0x8662
+    836c:	86 e0       	ldi	r24, 0x06	; 6
+    836e:	90 e0       	ldi	r25, 0x00	; 0
+    8370:	a0 e0       	ldi	r26, 0x00	; 0
+    8372:	b0 e0       	ldi	r27, 0x00	; 0
+    8374:	f9 01       	movw	r30, r18
+    8376:	80 83       	st	Z, r24
+    8378:	91 83       	std	Z+1, r25	; 0x01
+    837a:	a2 83       	std	Z+2, r26	; 0x02
+    837c:	b3 83       	std	Z+3, r27	; 0x03
+    837e:	6f c0       	rjmp	.+222    	; 0x845e <ISR_HF+0x2c2>
+    8380:	80 91 61 86 	lds	r24, 0x8661
+    8384:	90 91 62 86 	lds	r25, 0x8662
+    8388:	fc 01       	movw	r30, r24
+    838a:	80 81       	ld	r24, Z
+    838c:	91 81       	ldd	r25, Z+1	; 0x01
+    838e:	a2 81       	ldd	r26, Z+2	; 0x02
+    8390:	b3 81       	ldd	r27, Z+3	; 0x03
+    8392:	88 0f       	add	r24, r24
+    8394:	99 1f       	adc	r25, r25
+    8396:	80 93 5d 86 	sts	0x865D, r24
+    839a:	90 93 5e 86 	sts	0x865E, r25
+    839e:	80 91 5d 86 	lds	r24, 0x865D
+    83a2:	90 91 5e 86 	lds	r25, 0x865E
+    83a6:	89 3f       	cpi	r24, 0xF9	; 249
+    83a8:	f3 e0       	ldi	r31, 0x03	; 3
+    83aa:	9f 07       	cpc	r25, r31
+    83ac:	38 f0       	brcs	.+14     	; 0x83bc <ISR_HF+0x220>
+    83ae:	88 ef       	ldi	r24, 0xF8	; 248
+    83b0:	93 e0       	ldi	r25, 0x03	; 3
+    83b2:	80 93 5d 86 	sts	0x865D, r24
+    83b6:	90 93 5e 86 	sts	0x865E, r25
+    83ba:	51 c0       	rjmp	.+162    	; 0x845e <ISR_HF+0x2c2>
+    83bc:	50 c0       	rjmp	.+160    	; 0x845e <ISR_HF+0x2c2>
+    83be:	80 91 5b 86 	lds	r24, 0x865B
+    83c2:	90 91 5c 86 	lds	r25, 0x865C
+    83c6:	fc 01       	movw	r30, r24
+    83c8:	20 81       	ld	r18, Z
+    83ca:	31 81       	ldd	r19, Z+1	; 0x01
+    83cc:	80 91 58 86 	lds	r24, 0x8658
+    83d0:	90 91 59 86 	lds	r25, 0x8659
+    83d4:	fc 01       	movw	r30, r24
+    83d6:	80 81       	ld	r24, Z
+    83d8:	91 81       	ldd	r25, Z+1	; 0x01
+    83da:	82 0f       	add	r24, r18
+    83dc:	93 1f       	adc	r25, r19
+    83de:	88 0f       	add	r24, r24
+    83e0:	99 1f       	adc	r25, r25
+    83e2:	80 5e       	subi	r24, 0xE0	; 224
+    83e4:	9f 43       	sbci	r25, 0x3F	; 63
+    83e6:	80 93 56 86 	sts	0x8656, r24
+    83ea:	90 93 57 86 	sts	0x8657, r25
+    83ee:	80 91 56 86 	lds	r24, 0x8656
+    83f2:	90 91 57 86 	lds	r25, 0x8657
+    83f6:	9c 01       	movw	r18, r24
+    83f8:	80 91 5d 86 	lds	r24, 0x865D
+    83fc:	90 91 5e 86 	lds	r25, 0x865E
+    8400:	88 0f       	add	r24, r24
+    8402:	99 1f       	adc	r25, r25
+    8404:	80 5e       	subi	r24, 0xE0	; 224
+    8406:	9f 43       	sbci	r25, 0x3F	; 63
+    8408:	28 17       	cp	r18, r24
+    840a:	39 07       	cpc	r19, r25
+    840c:	30 f0       	brcs	.+12     	; 0x841a <ISR_HF+0x27e>
+    840e:	80 e2       	ldi	r24, 0x20	; 32
+    8410:	90 ec       	ldi	r25, 0xC0	; 192
+    8412:	80 93 56 86 	sts	0x8656, r24
+    8416:	90 93 57 86 	sts	0x8657, r25
+    841a:	80 91 5b 86 	lds	r24, 0x865B
+    841e:	90 91 5c 86 	lds	r25, 0x865C
+    8422:	fc 01       	movw	r30, r24
+    8424:	10 82       	st	Z, r1
+    8426:	11 82       	std	Z+1, r1	; 0x01
+    8428:	1a c0       	rjmp	.+52     	; 0x845e <ISR_HF+0x2c2>
+    842a:	80 e2       	ldi	r24, 0x20	; 32
+    842c:	90 ec       	ldi	r25, 0xC0	; 192
+    842e:	80 93 56 86 	sts	0x8656, r24
+    8432:	90 93 57 86 	sts	0x8657, r25
+    8436:	80 91 56 86 	lds	r24, 0x8656
+    843a:	90 91 57 86 	lds	r25, 0x8657
+    843e:	80 93 63 86 	sts	0x8663, r24
+    8442:	90 93 64 86 	sts	0x8664, r25
+    8446:	80 91 5b 86 	lds	r24, 0x865B
+    844a:	90 91 5c 86 	lds	r25, 0x865C
+    844e:	fc 01       	movw	r30, r24
+    8450:	10 82       	st	Z, r1
+    8452:	11 82       	std	Z+1, r1	; 0x01
+    8454:	04 c0       	rjmp	.+8      	; 0x845e <ISR_HF+0x2c2>
+    8456:	81 e0       	ldi	r24, 0x01	; 1
+    8458:	80 93 5a 86 	sts	0x865A, r24
+    845c:	00 00       	nop
+    845e:	80 e2       	ldi	r24, 0x20	; 32
+    8460:	92 e0       	ldi	r25, 0x02	; 2
+    8462:	20 e1       	ldi	r18, 0x10	; 16
+    8464:	fc 01       	movw	r30, r24
+    8466:	27 87       	std	Z+15, r18	; 0x0f
+    8468:	18 95       	reti
+    846a:	0f 90       	pop	r0
+    846c:	0f 90       	pop	r0
+    846e:	08 95       	ret
+
+00008470 <ISR_PTC>:
+    8470:	00 d0       	rcall	.+0      	; 0x8472 <ISR_PTC+0x2>
+    8472:	00 d0       	rcall	.+0      	; 0x8474 <ISR_PTC+0x4>
+    8474:	cd b7       	in	r28, 0x3d	; 61
+    8476:	de b7       	in	r29, 0x3e	; 62
+    8478:	8b 83       	std	Y+3, r24	; 0x03
+    847a:	9c 83       	std	Y+4, r25	; 0x04
+    847c:	80 91 5d 86 	lds	r24, 0x865D
+    8480:	90 91 5e 86 	lds	r25, 0x865E
+    8484:	00 97       	sbiw	r24, 0x00	; 0
+    8486:	d9 f4       	brne	.+54     	; 0x84be <ISR_PTC+0x4e>
+    8488:	20 e2       	ldi	r18, 0x20	; 32
+    848a:	32 e0       	ldi	r19, 0x02	; 2
+    848c:	80 e0       	ldi	r24, 0x00	; 0
+    848e:	93 e0       	ldi	r25, 0x03	; 3
+    8490:	fc 01       	movw	r30, r24
+    8492:	82 85       	ldd	r24, Z+10	; 0x0a
+    8494:	81 70       	andi	r24, 0x01	; 1
+    8496:	88 23       	and	r24, r24
+    8498:	39 f4       	brne	.+14     	; 0x84a8 <ISR_PTC+0x38>
+    849a:	80 e0       	ldi	r24, 0x00	; 0
+    849c:	93 e0       	ldi	r25, 0x03	; 3
+    849e:	fc 01       	movw	r30, r24
+    84a0:	82 85       	ldd	r24, Z+10	; 0x0a
+    84a2:	82 70       	andi	r24, 0x02	; 2
+    84a4:	88 23       	and	r24, r24
+    84a6:	19 f0       	breq	.+6      	; 0x84ae <ISR_PTC+0x3e>
+    84a8:	81 e0       	ldi	r24, 0x01	; 1
+    84aa:	90 e0       	ldi	r25, 0x00	; 0
+    84ac:	02 c0       	rjmp	.+4      	; 0x84b2 <ISR_PTC+0x42>
+    84ae:	80 e0       	ldi	r24, 0x00	; 0
+    84b0:	90 e0       	ldi	r25, 0x00	; 0
+    84b2:	82 95       	swap	r24
+    84b4:	88 0f       	add	r24, r24
+    84b6:	80 7e       	andi	r24, 0xE0	; 224
+    84b8:	f9 01       	movw	r30, r18
+    84ba:	87 87       	std	Z+15, r24	; 0x0f
+    84bc:	a4 c0       	rjmp	.+328    	; 0x8606 <ISR_PTC+0x196>
+    84be:	80 e0       	ldi	r24, 0x00	; 0
+    84c0:	93 e0       	ldi	r25, 0x03	; 3
+    84c2:	fc 01       	movw	r30, r24
+    84c4:	82 85       	ldd	r24, Z+10	; 0x0a
+    84c6:	81 70       	andi	r24, 0x01	; 1
+    84c8:	88 23       	and	r24, r24
+    84ca:	09 f4       	brne	.+2      	; 0x84ce <ISR_PTC+0x5e>
+    84cc:	9c c0       	rjmp	.+312    	; 0x8606 <ISR_PTC+0x196>
+    84ce:	80 91 63 86 	lds	r24, 0x8663
+    84d2:	90 91 64 86 	lds	r25, 0x8664
+    84d6:	8c 01       	movw	r16, r24
+    84d8:	c8 01       	movw	r24, r16
+    84da:	02 96       	adiw	r24, 0x02	; 2
+    84dc:	80 93 63 86 	sts	0x8663, r24
+    84e0:	90 93 64 86 	sts	0x8664, r25
+    84e4:	88 e5       	ldi	r24, 0x58	; 88
+    84e6:	93 e0       	ldi	r25, 0x03	; 3
+    84e8:	0e 94 60 8c 	call	0x118c0	; 0x118c0 <AVR16_ReadMemory16>
+    84ec:	f8 01       	movw	r30, r16
+    84ee:	80 83       	st	Z, r24
+    84f0:	91 83       	std	Z+1, r25	; 0x01
+    84f2:	80 91 63 86 	lds	r24, 0x8663
+    84f6:	90 91 64 86 	lds	r25, 0x8664
+    84fa:	9c 01       	movw	r18, r24
+    84fc:	80 91 5d 86 	lds	r24, 0x865D
+    8500:	90 91 5e 86 	lds	r25, 0x865E
+    8504:	88 0f       	add	r24, r24
+    8506:	99 1f       	adc	r25, r25
+    8508:	80 5e       	subi	r24, 0xE0	; 224
+    850a:	9f 43       	sbci	r25, 0x3F	; 63
+    850c:	28 17       	cp	r18, r24
+    850e:	39 07       	cpc	r19, r25
+    8510:	30 f0       	brcs	.+12     	; 0x851e <ISR_PTC+0xae>
+    8512:	80 e2       	ldi	r24, 0x20	; 32
+    8514:	90 ec       	ldi	r25, 0xC0	; 192
+    8516:	80 93 63 86 	sts	0x8663, r24
+    851a:	90 93 64 86 	sts	0x8664, r25
+    851e:	20 91 63 86 	lds	r18, 0x8663
+    8522:	30 91 64 86 	lds	r19, 0x8664
+    8526:	80 91 56 86 	lds	r24, 0x8656
+    852a:	90 91 57 86 	lds	r25, 0x8657
+    852e:	28 17       	cp	r18, r24
+    8530:	39 07       	cpc	r19, r25
+    8532:	29 f4       	brne	.+10     	; 0x853e <ISR_PTC+0xce>
+    8534:	80 e2       	ldi	r24, 0x20	; 32
+    8536:	92 e0       	ldi	r25, 0x02	; 2
+    8538:	20 e4       	ldi	r18, 0x40	; 64
+    853a:	fc 01       	movw	r30, r24
+    853c:	27 87       	std	Z+15, r18	; 0x0f
+    853e:	80 91 5b 86 	lds	r24, 0x865B
+    8542:	90 91 5c 86 	lds	r25, 0x865C
+    8546:	fc 01       	movw	r30, r24
+    8548:	80 81       	ld	r24, Z
+    854a:	91 81       	ldd	r25, Z+1	; 0x01
+    854c:	00 97       	sbiw	r24, 0x00	; 0
+    854e:	09 f0       	breq	.+2      	; 0x8552 <ISR_PTC+0xe2>
+    8550:	5a c0       	rjmp	.+180    	; 0x8606 <ISR_PTC+0x196>
+    8552:	20 91 63 86 	lds	r18, 0x8663
+    8556:	30 91 64 86 	lds	r19, 0x8664
+    855a:	80 91 56 86 	lds	r24, 0x8656
+    855e:	90 91 57 86 	lds	r25, 0x8657
+    8562:	28 17       	cp	r18, r24
+    8564:	39 07       	cpc	r19, r25
+    8566:	c0 f4       	brcc	.+48     	; 0x8598 <ISR_PTC+0x128>
+    8568:	80 91 5d 86 	lds	r24, 0x865D
+    856c:	90 91 5e 86 	lds	r25, 0x865E
+    8570:	9c 01       	movw	r18, r24
+    8572:	22 0f       	add	r18, r18
+    8574:	33 1f       	adc	r19, r19
+    8576:	80 91 63 86 	lds	r24, 0x8663
+    857a:	90 91 64 86 	lds	r25, 0x8664
+    857e:	28 0f       	add	r18, r24
+    8580:	39 1f       	adc	r19, r25
+    8582:	80 91 56 86 	lds	r24, 0x8656
+    8586:	90 91 57 86 	lds	r25, 0x8657
+    858a:	a9 01       	movw	r20, r18
+    858c:	48 1b       	sub	r20, r24
+    858e:	59 0b       	sbc	r21, r25
+    8590:	ca 01       	movw	r24, r20
+    8592:	89 83       	std	Y+1, r24	; 0x01
+    8594:	9a 83       	std	Y+2, r25	; 0x02
+    8596:	0f c0       	rjmp	.+30     	; 0x85b6 <ISR_PTC+0x146>
+    8598:	80 91 63 86 	lds	r24, 0x8663
+    859c:	90 91 64 86 	lds	r25, 0x8664
+    85a0:	9c 01       	movw	r18, r24
+    85a2:	80 91 56 86 	lds	r24, 0x8656
+    85a6:	90 91 57 86 	lds	r25, 0x8657
+    85aa:	f9 01       	movw	r30, r18
+    85ac:	e8 1b       	sub	r30, r24
+    85ae:	f9 0b       	sbc	r31, r25
+    85b0:	cf 01       	movw	r24, r30
+    85b2:	89 83       	std	Y+1, r24	; 0x01
+    85b4:	9a 83       	std	Y+2, r25	; 0x02
+    85b6:	80 91 5d 86 	lds	r24, 0x865D
+    85ba:	90 91 5e 86 	lds	r25, 0x865E
+    85be:	29 81       	ldd	r18, Y+1	; 0x01
+    85c0:	3a 81       	ldd	r19, Y+2	; 0x02
+    85c2:	28 17       	cp	r18, r24
+    85c4:	39 07       	cpc	r19, r25
+    85c6:	f8 f0       	brcs	.+62     	; 0x8606 <ISR_PTC+0x196>
+    85c8:	80 91 5b 86 	lds	r24, 0x865B
+    85cc:	90 91 5c 86 	lds	r25, 0x865C
+    85d0:	29 81       	ldd	r18, Y+1	; 0x01
+    85d2:	3a 81       	ldd	r19, Y+2	; 0x02
+    85d4:	36 95       	lsr	r19
+    85d6:	27 95       	ror	r18
+    85d8:	fc 01       	movw	r30, r24
+    85da:	20 83       	st	Z, r18
+    85dc:	31 83       	std	Z+1, r19	; 0x01
+    85de:	80 91 58 86 	lds	r24, 0x8658
+    85e2:	90 91 59 86 	lds	r25, 0x8659
+    85e6:	20 91 56 86 	lds	r18, 0x8656
+    85ea:	30 91 57 86 	lds	r19, 0x8657
+    85ee:	20 52       	subi	r18, 0x20	; 32
+    85f0:	30 4c       	sbci	r19, 0xC0	; 192
+    85f2:	36 95       	lsr	r19
+    85f4:	27 95       	ror	r18
+    85f6:	fc 01       	movw	r30, r24
+    85f8:	20 83       	st	Z, r18
+    85fa:	31 83       	std	Z+1, r19	; 0x01
+    85fc:	80 e2       	ldi	r24, 0x20	; 32
+    85fe:	92 e0       	ldi	r25, 0x02	; 2
+    8600:	20 e8       	ldi	r18, 0x80	; 128
+    8602:	fc 01       	movw	r30, r24
+    8604:	27 87       	std	Z+15, r18	; 0x0f
+    8606:	80 e0       	ldi	r24, 0x00	; 0
+    8608:	93 e0       	ldi	r25, 0x03	; 3
+    860a:	23 e0       	ldi	r18, 0x03	; 3
+    860c:	fc 01       	movw	r30, r24
+    860e:	22 87       	std	Z+10, r18	; 0x0a
+    8610:	18 95       	reti
+    8612:	24 96       	adiw	r28, 0x04	; 4
+    8614:	cd bf       	out	0x3d, r28	; 61
+    8616:	de bf       	out	0x3e, r29	; 62
+    8618:	08 95       	ret
+
+0000861a <ISR_TIMER>:
+    861a:	00 d0       	rcall	.+0      	; 0x861c <ISR_TIMER+0x2>
+    861c:	cd b7       	in	r28, 0x3d	; 61
+    861e:	de b7       	in	r29, 0x3e	; 62
+    8620:	89 83       	std	Y+1, r24	; 0x01
+    8622:	9a 83       	std	Y+2, r25	; 0x02
+    8624:	80 e8       	ldi	r24, 0x80	; 128
+    8626:	93 e0       	ldi	r25, 0x03	; 3
+    8628:	fc 01       	movw	r30, r24
+    862a:	24 85       	ldd	r18, Z+12	; 0x0c
+    862c:	21 60       	ori	r18, 0x01	; 1
+    862e:	fc 01       	movw	r30, r24
+    8630:	24 87       	std	Z+12, r18	; 0x0c
+    8632:	18 95       	reti
+    8634:	0f 90       	pop	r0
+    8636:	0f 90       	pop	r0
+    8638:	08 95       	ret
+
+0000863a <ISR_MAILBOX>:
+    863a:	00 d0       	rcall	.+0      	; 0x863c <ISR_MAILBOX+0x2>
+    863c:	cd b7       	in	r28, 0x3d	; 61
+    863e:	de b7       	in	r29, 0x3e	; 62
+    8640:	89 83       	std	Y+1, r24	; 0x01
+    8642:	9a 83       	std	Y+2, r25	; 0x02
+    8644:	80 ea       	ldi	r24, 0xA0	; 160
+    8646:	93 e0       	ldi	r25, 0x03	; 3
+    8648:	21 e0       	ldi	r18, 0x01	; 1
+    864a:	fc 01       	movw	r30, r24
+    864c:	20 83       	st	Z, r18
+    864e:	18 95       	reti
+    8650:	0f 90       	pop	r0
+    8652:	0f 90       	pop	r0
+    8654:	08 95       	ret

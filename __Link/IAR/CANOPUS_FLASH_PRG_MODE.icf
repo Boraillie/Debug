@@ -1,0 +1,179 @@
+/*###ICF### Section handled by ICF editor, don't touch! ****/
+/*-Editor annotation file-*/
+/* IcfEditorFile="$TOOLKIT_DIR$\config\ide\IcfEditor\a_v1_0.xml" */
+
+
+/*****************************************************************************/
+/*** FLASH ***/
+/*****************************************************************************/
+
+//SRAM
+
+
+
+//   | ---------------	 ---------------  _region_SRAM_CODE_start__
+//   |   		|		|
+//   |   		|		|
+//   |   		|		|
+//   |   		|		|
+//   |   		|   SRAM_CODE	|
+//   |   		|		|
+//   |   		|		|
+//   |   		|		|
+//   |   		|		|
+//   |   		| --------------|_region_SRAM_CODE_start__ + _region_SRAM_CODE_size__
+//   |   		| --------------|_region_SRAM_CODE_start__ + _region_MAX_CODE_size__
+//   |   SRAM_BASE	| --------------|_region_SRAM_RW_start__
+//   |   		|		|
+//   |   		|		|
+//   |   		|		|
+//   |   		|    SRAM_RW	|
+//   |   		|		|
+//   |   		|		|
+//   |   		|		|
+//   |   		|		|
+//   |   		|		|
+//   |   		| --------------|_region_SRAM_RW_start__ + _region_SRAM_RW_size__
+//    ---------------	| --------------|_region_SRAM_RW_start__ + _region_SRAM_BASE_size__-_region_MAX_CODE_size__
+//			| --------------|_region_SRAM_EXT_start__
+//			|		|
+//			|		|
+//			|		|
+//			|		|
+//			|		|
+//			|    SRAM_EXT	|
+//			|		|
+//			|		|
+//			|		|
+//			| --------------|_region_SRAM_EXT_start__ + _region_SRAM_EXT_size__
+//			  -------------- _region_SRAM_EXT_start__ + _region_SRAM_size__-_region_SRAM_BASE_size__
+
+
+
+define symbol wait_loop_offset = 0x200;
+
+/*****************************************************************************/
+/* - Memory Regions - */
+define symbol _region_FLASH_start__ = 0x00400000;
+define symbol _region_FLASH_size__  = 0x00080000;  //512 KB minimal config. Product up to 2MB = 0x200 000
+/**********************************************************/
+define symbol _TCM_cfg__ = 0x0;
+export symbol _TCM_cfg__;
+define symbol _region_SRAM_start__ = 0x20400000;
+define symbol _region_SRAM_size__  = 0x00040000;   //256KB-0KB(TCM) min config.
+define symbol _region_DTCM_start__ = 0x20000000;
+define symbol _region_DTCM_size__  = 0x00000000;   //0KB
+define symbol _region_ITCM_start__ = 0x00000000;
+define symbol _region_ITCM_size__  = 0x00000000;   //0KB
+
+/**********************************************************/
+define symbol _region_SRAM_BASE_size__ = 0x00010000;
+export symbol _region_SRAM_BASE_size__;
+/**********************************************************/
+define symbol _region_MAX_CODE_size__  = 0x00007FE0;
+//define symbol _region_MAX_CODE_size__  = 0x00008000;
+export symbol _region_MAX_CODE_size__;
+define symbol _region_STARTUP_CODE_size__  = 0xA00;
+define symbol _region_PRG_MONITOR_CODE_size__  = 0x0900;
+
+
+/**********************************************************/
+define symbol _region_SRAM_CODE_start__ = _region_SRAM_start__;
+define symbol _region_SRAM_CODE_size__  = _region_MAX_CODE_size__;
+define symbol _region_SRAM_BASE_start__ = _region_SRAM_start__;
+define symbol _region_SRAM_RW_start__   = _region_SRAM_CODE_start__+_region_MAX_CODE_size__;
+define symbol _region_SRAM_RW_size__    = _region_SRAM_BASE_size__-_region_MAX_CODE_size__;
+define symbol _region_SRAM_RW_PRG_start__   = _region_SRAM_RW_start__;
+define symbol _region_SRAM_RW_PRG_size__    = 0x1000;
+define symbol _region_SRAM_RW_USER_start__  = _region_SRAM_RW_PRG_start__+_region_SRAM_RW_PRG_size__;
+define symbol _region_SRAM_RW_USER_size__   = _region_SRAM_RW_size__-_region_SRAM_RW_PRG_size__;
+define symbol _region_SRAM_EXT_start__  = _region_SRAM_RW_start__+_region_SRAM_RW_size__;
+define symbol _region_SRAM_EXT_size__   = _region_SRAM_size__-_region_SRAM_BASE_size__;
+
+
+define symbol _region_USER_CODE_size__  = _region_MAX_CODE_size__ - _region_STARTUP_CODE_size__ - _region_PRG_MONITOR_CODE_size__;
+define symbol _region_STARTUP_CODE_start__ = _region_FLASH_start__;
+define symbol _region_PRG_MONITOR_CODE_start__ = _region_STARTUP_CODE_start__ + _region_STARTUP_CODE_size__;
+define symbol _region_USER_CODE_start__  = _region_PRG_MONITOR_CODE_start__ + _region_PRG_MONITOR_CODE_size__;
+export symbol _region_STARTUP_CODE_start__;
+
+/*
+define symbol _region_FLASH_CODE_start__ = _region_PRG_MONITOR_CODE_start__ + _region_PRG_MONITOR_CODE_size__;
+define symbol _region_FLASH_CODE_size__  = _region_MAX_CODE_size__ - _region_PRG_MONITOR_CODE_size__;
+*/
+define symbol _region_FLASH_CODE_start__ = _region_FLASH_start__;
+define symbol _region_FLASH_CODE_size__  = _region_MAX_CODE_size__;
+
+define memory mem with size = 4G;
+define region FLASH  = mem:[from _region_FLASH_start__  size _region_FLASH_size__];
+
+define region SRAM  = mem:[from _region_SRAM_start__  size _region_SRAM_size__];
+define region SRAM_CODE = mem:[from _region_SRAM_CODE_start__  size _region_SRAM_CODE_size__];
+define region SRAM_RW   = mem:[from _region_SRAM_RW_start__  size _region_SRAM_RW_size__];
+define region SRAM_RW_PRG   = mem:[from _region_SRAM_RW_PRG_start__  size _region_SRAM_RW_PRG_size__];
+define region SRAM_RW_USER  = mem:[from _region_SRAM_RW_USER_start__  size _region_SRAM_RW_USER_size__];
+define region SRAM_BASE = mem:[from _region_SRAM_BASE_start__  size _region_SRAM_BASE_size__];
+define region SRAM_EXT  = mem:[from _region_SRAM_EXT_start__ size _region_SRAM_EXT_size__];
+define region FLASH_CODE = mem:[from _region_FLASH_CODE_start__ size _region_FLASH_CODE_size__];
+define region STARTUP_CODE = mem:[from _region_STARTUP_CODE_start__ size _region_STARTUP_CODE_size__];
+define region PRG_MONITOR_CODE = mem:[from _region_PRG_MONITOR_CODE_start__ size _region_PRG_MONITOR_CODE_size__];
+define region USER_CODE = mem:[from _region_USER_CODE_start__ size _region_USER_CODE_size__];
+/*****************************************************************************/
+
+/*-checksum-*/
+define symbol _checksum_add__ = _region_FLASH_CODE_start__+_region_FLASH_CODE_size__+0x1C;
+//define symbol _checksum_add__ = _region_USER_CODE_start__ - 0x04;
+export symbol _checksum_add__;
+place at address mem:_checksum_add__ { ro section .checksum };
+
+
+/*-binary infos-*/
+define symbol _info_add__ = _region_FLASH_CODE_start__+_region_FLASH_CODE_size__;
+/*define symbol _info_add__ = _region_USER_CODE_start__ - 0x20;*/
+place at address mem:_info_add__ { ro section .info_section };
+
+/*-Stack-*/
+define symbol __ICFEDIT_size_cstack__   = 0x0400;
+define symbol __ICFEDIT_size_heap__     = 0x0200;
+define block CSTACK    with alignment = 4, size = __ICFEDIT_size_cstack__   { };
+define block HEAP      with alignment = 4, size = __ICFEDIT_size_heap__     { };
+
+/*-Specials-*/
+define symbol __ICFEDIT_intvec_start__ = _region_FLASH_start__;
+place at address mem:__ICFEDIT_intvec_start__ { ro section .intvec };
+
+define symbol __ICFEDIT_test_start__ = _region_FLASH_start__+wait_loop_offset;
+place at address mem:__ICFEDIT_test_start__ { ro section .wait_time };
+
+
+define block PRG_STARTUP_CODE with fixed order
+{
+    section .cstartup,
+    section .main,
+    section .prg_used_utils_functions,
+    section .prg_used_drv_functions
+};
+
+define block PRG_MONITOR_CODE with fixed order
+{
+    readonly object sspi.o,
+    readonly object prg_monitor.o
+/*    readonly object prg_tests_list.o*/
+};
+place at address mem:_region_USER_CODE_start__ { ro object prg_tests_list.o };
+
+
+initialize by copy { rw };
+do not initialize  { section .noinit };
+
+place in STARTUP_CODE  { block PRG_STARTUP_CODE };
+place in PRG_MONITOR_CODE  { block PRG_MONITOR_CODE };
+place in USER_CODE  { ro };
+
+/*place in FLASH_CODE  { ro };*/
+place in SRAM_RW_PRG  { rw object prg_monitor.o, rw object sspi.o , rw object prg_test_list.o };
+place in SRAM_RW_PRG  { rw object cstartup.o, rw object main.o };
+place in SRAM_RW_USER { rw , block CSTACK };
+place in SRAM_EXT     { block HEAP };
+                        
+
