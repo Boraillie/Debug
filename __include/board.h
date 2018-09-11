@@ -28,6 +28,8 @@
   #include "Boards/SAM4S_XPlained.h"
 #elif defined SAM4S_EK_REVB
   #include "Boards/SAM4S_EK.h"
+#elif defined SAM4S_XPLAINED_PRO
+  #include "Boards/SAM4S_XPLAINED_PRO.h"
 #elif defined SAM4S_VB_QFN64_LQFP64_REVA
   #include "Boards/SAM4S_VB.h"
 #elif defined SAM4S_VB_SCH_BGA100_LQFP100_REVA

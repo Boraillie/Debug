@@ -11,20 +11,20 @@
 //#define __SAM4S8B__
 //#define __SAM4S8C__
 //#define __SAM4S16B__
-#define __SAM4S16C__
+//#define __SAM4S16C__
 //#define __SAM4SA16B__
 //#define __SAM4SA16C__
 //#define __SAM4SD16B__
 //#define __SAM4SD16C__
 //#define __SAM4SD32B__
-//#define __SAM4SD32C__
+#define __SAM4SD32C__
 // ----------------------------------------------------------------------------
 //  Package
 //#define DEVICE_PACKAGE _QFP64_
 #define DEVICE_PACKAGE _QFP100_
 // ----------------------------------------------------------------------------
 // Board (one define only)
-#define SAM4S_VB_SCH_BGA100_LQFP100_REVA
+#define SAM4S_XPLAINED_PRO
 // ----------------------------------------------------------------------------
 
 
@@ -40,7 +40,7 @@
 #define PLLB_DIV 2
 #define PCK_PRESCALER   1             // divider value 1,8,16,32,64
 #define SLOW_CLK_CONFIG USE_RC_32KHZ  // USE_RC_32KHZ or USE_EXT_CLK or USE_XTAL
-#define EXT_CLOCK_FREQ  1000000       // Value (Hz) (for external clock only)
+#define EXT_CLOCK_FREQ  1200000       // Value (Hz) (for external clock only)
 #define SLOW_CLOCK_FREQ 32768         // Value (Hz)
 // ----------------------------------------------------------------------------
 
@@ -51,7 +51,7 @@
 #define USE_DEBUG_MENU          (1)             // 1=enable 0=disable
 #define DEBUG_MODE              (SERIAL_DEBUG)  // SERIAL_DEBUG or NO_DEBUG
 #define DEBUG_LINK_USED         UART            // DBG_UNIT,UART,USART... (board dependant)
-#define DEBUG_LINK_NUMBER       0               // X for UARTX Nothing for DBG_UNIT)
+#define DEBUG_LINK_NUMBER       1               // X for UARTX Nothing for DBG_UNIT)
 #define DEBUG_BAUD_RATE         (9600)          // Value (bauds)
 #define ERRLOG_MODE             (ISRAM)         // ISRAM, FLASH or NONE
 // ----------------------------------------------------------------------------
