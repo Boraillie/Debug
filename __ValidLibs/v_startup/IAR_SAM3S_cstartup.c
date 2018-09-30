@@ -44,7 +44,7 @@
 #include "device.h"
 #include "board.h"
 #include "exceptions.h"
-
+#include "drivers/pio/pio.h"
 
 //------------------------------------------------------------------------------
 /// This is the code that gets called on processor reset. To initialize the
@@ -67,7 +67,23 @@ int __low_level_init( void )
      __asm("NOP");
    }
 #endif
-       
+
+
+#if (PIO_MEASURE_ATOMIC == 1 )
+   //enable PIO Clock
+   PMC->PMC_PCER0 = 1 << ID_PIOA; 
+   //Set default state to 0
+   PIOA->PIO_CODR = PIO_PA24;
+   // Configure pin as output
+   PIOA->PIO_OER = PIO_PA24;
+   PIOA->PIO_PER = PIO_PA24;
+#elif (PIO_MEASURE_CALL == 1 )
+    pmc_enable_periph_clk(ID_PIOA);
+    pio_configure(PIOA,PIO_OUTPUT_0,PIO_PA24,PIO_DEFAULT);
+#endif
+      
+
+   
    //  --------- EFC Init
    //REG_EFC_FMR = AT91C_EFC_FWS_6WS; // 1 Wait State necessary to work at more than 30 MHz
 #ifdef REG_EFC_FMR

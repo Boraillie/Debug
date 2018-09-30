@@ -184,7 +184,14 @@ void run_menu(void)
    Print_device_info();
    Print_menu();
  
-   MenuChoice = 0;
+
+#if (PIO_MEASURE_ATOMIC == 1 )
+   //Set state to 1
+   PIOA->PIO_SODR = PIO_PA24;
+#elif (PIO_MEASURE_CALL == 1 )
+   pio_set(BRD_BASE_PIO_D0,BRD_D0_MASK);
+#endif
+        MenuChoice = 0;
    while (1)
    {
       switch (MenuChoice)
