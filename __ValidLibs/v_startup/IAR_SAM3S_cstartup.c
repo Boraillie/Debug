@@ -55,7 +55,18 @@
 int __low_level_init( void )
 {  
    unsigned int  read_reg;
-   
+
+#if ( PIPELINE_DEMO == 1)
+   // Pipeline deo : to be executed in 
+   volatile uint32_t i=0;
+   for(i=0;i<10;++i)
+   {
+     __asm("NOP");
+     __asm("NOP");
+     __asm("NOP");
+     __asm("NOP");
+   }
+#endif
        
    //  --------- EFC Init
    //REG_EFC_FMR = AT91C_EFC_FWS_6WS; // 1 Wait State necessary to work at more than 30 MHz
