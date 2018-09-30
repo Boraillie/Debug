@@ -23,13 +23,12 @@
 *
 *
 *----------------------------------------------------------------------------
---------------------------------------------
-|    Board       |        PIO              |
-____________________________________________
-| Ye LED (LED1)  |  PC10 (1 => LED off)    |
-| Ye LED (LED2)  |  PC17 (1 => LED off)    |
-| RClick (BP2)   |  PA5  (push => 0)       |
-============================================
+------------------------------------------------------
+|    Board              |        PIO                  |
+______________________________________________________
+| Ye LED (LED0)         |  PC23  ( 0 => LED off)      |
+| SW0 (User boutton)    |  PC24  ( push => 0)         |
+======================================================
 *----------------------------------------------------------------------------
 *----------------------------------------------------------------------------
 */
@@ -40,7 +39,7 @@ ____________________________________________
 /*----------------------------------------------------------------------------*/
 #define BRD_PIOA_HAS_IO (1)
 #define BRD_PIOB_HAS_IO (1)
-#define BRD_PIOC_HAS_IO (0)
+#define BRD_PIOC_HAS_IO (1)
 //#define BRD_PIOD_HAS_IO (0)
 //#define BRD_PIOE_HAS_IO (0)
 /*----------------------------------------------------------------------------*/
@@ -49,65 +48,47 @@ ____________________________________________
 /*----------------------------------------------------------------------------*/
 /* -------- Leds Definition                                                   */
 /*----------------------------------------------------------------------------*/
-#define BRD_BASE_PIO_D1  PIOA
-#define BRD_BASE_PIO_D3  PIOA
-#define BRD_BASE_PIO_D4  PIOA
-#define BRD_ID_PIO_D1    ID_PIOA
-#define BRD_ID_PIO_D3    ID_PIOA
-#define BRD_ID_PIO_D4    ID_PIOA
-#define BRD_D1_MASK      (1<<15)  /* PA15 POWER LED*/ 
-#define BRD_D3_MASK      (1<<16)  /* PA16 D3 */
-#define BRD_D4_MASK      (1<<6)	  /* PA6  D4 */
+#define BRD_BASE_PIO_D0  PIOC
+#define BRD_ID_PIO_D0    ID_PIOC
+#define BRD_D0_MASK      (1<<23)	  /* PC23  D0 */
 
-#define BRD_D1_POLARITY 1 // (1 => LED On)
-#define BRD_D3_POLARITY 0 // (0 => LED On)
-#define BRD_D4_POLARITY 0 // (0 => LED On)
+#define BRD_D0_POLARITY 0 // (0 => LED On)
 
-#define BRD_BASE_PIO_ALL_LED  PIOA /////////////////////////////////////////////
-#define BRD_ID_PIO_ALL_LED    ID_PIOA///////////////////////////////////////////
-#define BRD_ALL_LED_MASK      (BRD_D1_MASK|BRD_D3_MASK|BRD_D4_MASK)/////////////
+#define BRD_ALL_LED_MASK      (BRD_D0_MASK)/////////////
 
-#define BRD_PIOA_LED_MASK  (BRD_D1_MASK|BRD_D3_MASK|BRD_D4_MASK)
+#define BRD_PIOA_LED_MASK  (0)
 #define BRD_PIOB_LED_MASK  (0) // none
-#define BRD_PIOC_LED_MASK  (0) // none
+#define BRD_PIOC_LED_MASK  (BRD_D0_MASK) // none
 #define BRD_PIOD_LED_MASK  (0) // none
 #define BRD_PIOE_LED_MASK  (0) // none
 
-#define BRD_TURN_ON_D1   pio_set(BRD_BASE_PIO_D1,BRD_D1_MASK)
-#define BRD_TURN_OFF_D1  pio_clear(BRD_BASE_PIO_D1,BRD_D1_MASK)
-#define BRD_TOGGLE_D1    pio_toggle(BRD_BASE_PIO_D1,BRD_D1_MASK)
-#define BRD_TURN_ON_D3   pio_clear(BRD_BASE_PIO_D3,BRD_D3_MASK)
-#define BRD_TURN_OFF_D3  pio_set(BRD_BASE_PIO_D3,BRD_D3_MASK)
-#define BRD_TOGGLE_D3    pio_toggle(BRD_BASE_PIO_D3,BRD_D3_MASK)
-#define BRD_TURN_ON_D4   pio_clear(BRD_BASE_PIO_D4,BRD_D4_MASK)
-#define BRD_TURN_OFF_D4  pio_set(BRD_BASE_PIO_D4,BRD_D4_MASK)
-#define BRD_TOGGLE_D4    pio_toggle(BRD_BASE_PIO_D4,BRD_D4_MASK)
+#define BRD_TURN_OFF_D0   pio_set(BRD_BASE_PIO_D0,BRD_D0_MASK)
+#define BRD_TURN_ON_D0  pio_clear(BRD_BASE_PIO_D0,BRD_D0_MASK)
+#define BRD_TOGGLE_D0    pio_toggle(BRD_BASE_PIO_D0,BRD_D0_MASK)
+
 /*----------------------------------------------------------------------------*/
 
 
 /*----------------------------------------------------------------------------*/
 /* -------- Inputs Definition                                                 */
 /*----------------------------------------------------------------------------*/
-#define BRD_BASE_PIO_BP2   PIOA
-#define BRD_BASE_PIO_BP3   PIOA
-#define BRD_ID_PIO_BP2     ID_PIOA
-#define BRD_ID_PIO_BP3     ID_PIOA
-#define BRD_BP2_MASK       (1<<2)	// PA2  RIGHT CLICK 
-#define BRD_BP3_MASK       (1<<5)	// PA5  LEFT CLICK
+#define BRD_BASE_PIO_SW0   PIOC       //User button
+#define BRD_ID_PIO_SW0     ID_PIOC
+#define BRD_SW0_MASK       (1<<24)	
 
-#define BRD_BASE_PIO_ALL_INPUT  PIOA ///////////////////////////////////////////
-#define BRD_ID_PIO_ALL_INPUT    ID_PIOA ////////////////////////////////////////
-#define BRD_ALL_INPUT_MASK      (BRD_BP2_MASK | BRD_BP3_MASK) //////////////////
 
-#define BRD_PIOA_INPUT_MASK    (BRD_BP2_MASK | BRD_BP3_MASK)
+#define BRD_BASE_PIO_ALL_INPUT  PIOC ///////////////////////////////////////////
+#define BRD_ID_PIO_ALL_INPUT    ID_PIOC ////////////////////////////////////////
+#define BRD_ALL_INPUT_MASK      (BRD_SW0_MASK) //////////////////
+
+#define BRD_PIOA_INPUT_MASK    (0)
 #define BRD_PIOB_INPUT_MASK    (0) // none
-#define BRD_PIOC_INPUT_MASK    (0) // none
+#define BRD_PIOC_INPUT_MASK    (BRD_SW0_MASK) // none
 #define BRD_PIOD_INPUT_MASK    (0) // none
 #define BRD_PIOE_INPUT_MASK    (0) // none
 
 
-#define BRD_GET_BP2  pio_get(BRD_BASE_PIO_BP2,PIO_INPUT,BRD_BP2_MASK)
-#define BRD_GET_BP3  pio_get(BRD_BASE_PIO_BP3,PIO_INPUT,BRD_BP3_MASK)
+#define BRD_GET_SW0  pio_get(BRD_BASE_PIO_SW0,PIO_INPUT,BRD_SW0_MASK)
 /*----------------------------------------------------------------------------*/
 
 
