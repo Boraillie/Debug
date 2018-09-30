@@ -14,3 +14,7 @@ SAM4S_V_ADC/compil/FLASH/Exe/SAM4S_V_ADC.out
 SAM4S_V_ADC/compil/FLASH/Exe/SAM4S_V_ADC.bin
 *.o
 SAM4S_V_ADC/compil/settings/SAM4S_V_ADC.FLASH.cspy.bat
+*.ini
+*.sim
+*.pbw
+*.linf
