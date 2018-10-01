@@ -1,14 +1,26 @@
+*.pbi
+*.cout
+*.dep
+*.wspos
+*.wsdt
+*.dni
+*.dbgdt
+*.crun
+*.xcl
+*.browse
+*.pbd
+SAM4S_V_ADC/compil/settings/SAM4S_V_ADC.ISRAM.cspy.bat
+SAM4S_V_ADC/compil/FLASH/Exe/SAM4S_V_ADC.out
+SAM4S_V_ADC/compil/FLASH/Exe/SAM4S_V_ADC.bin
 
-basic-led-uart/
+__ASF/
 
-advanced_debug-TP0/__ASF/
+__ExternalLibs/
 
-advanced_debug-TP0/__ExternalLibs/
+__include/
 
-advanced_debug-TP0/__include/
+__Link/
 
-advanced_debug-TP0/__Link/
+__ValidLibs/
 
-advanced_debug-TP0/__ValidLibs/
-
-advanced_debug-TP0/SAM4S_V_ADC/compil/
+SAM4S_V_ADC/compil/
