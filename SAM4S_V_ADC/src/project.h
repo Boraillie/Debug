@@ -106,10 +106,17 @@
 #define INFO_SECTION _Pragma("location=\".info_section\"") // .icf definition
 // ----------------------------------------------------------------------------
 
-// Advanced debug Macros 
-#define PIPELINE_DEMO           (0)
-#define PIO_MEASURE_ATOMIC      (0)
-#define PIO_MEASURE_CALL        (1)
+// ----------------------------------------------------------------------------
+//   Advanced debug Macros 
+// ----------------------------------------------------------------------------
+
+//DEMOS
+
+#define DEMO_PIPELINE           (0)
+#define DEMO_PIO_MEASURE_ATOMIC      (0)
+#define DEMO_PIO_MEASURE_CALL        (1)
+
+//BUG LIST 
 
 //#define DONT_USE_CMSIS_INIT //system_samxxx files
 

@@ -132,10 +132,11 @@ int main()
    // ------------ Check last reset cause
    //reset_cause = check_reset_source();
 
-   // ------------ Watchdog Initialization
+#ifdef BUG_WDT  
+   // ------------ Watchdog Initialization 
    if(ENABLE_WDT)watchdog_enable(WDT,WDT_TIME);
    else wdt_disable(WDT);
-
+#endif
    // ------------ Internal voltage regulator settings
    if(ENABLE_VREG)supc_enable_voltage_regulator(SUPC);
    else supc_disable_voltage_regulator(SUPC);

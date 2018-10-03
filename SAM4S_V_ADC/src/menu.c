@@ -185,10 +185,10 @@ void run_menu(void)
    Print_menu();
  
 
-#if (PIO_MEASURE_ATOMIC == 1 )
+#if (DEMO_PIO_MEASURE_ATOMIC == 1 )
    //Set state to 1
    PIOA->PIO_SODR = PIO_PA24;
-#elif (PIO_MEASURE_CALL == 1 )
+#elif (DEMO_PIO_MEASURE_CALL == 1 )
    pio_set(BRD_BASE_PIO_D0,BRD_D0_MASK);
 #endif
         MenuChoice = 0;

@@ -4,6 +4,7 @@
 *.wspos
 *.wsdt
 *.dni
+*.log
 *.dbgdt
 *.crun
 *.xcl

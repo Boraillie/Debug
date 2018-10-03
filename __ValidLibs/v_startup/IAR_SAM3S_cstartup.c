@@ -56,7 +56,7 @@ int __low_level_init( void )
 {  
    unsigned int  read_reg;
 
-#if ( PIPELINE_DEMO == 1)
+#if ( DEMO_PIPELINE == 1)
    // Pipeline deo : to be executed in 
    volatile uint32_t i=0;
    for(i=0;i<10;++i)
@@ -69,7 +69,7 @@ int __low_level_init( void )
 #endif
 
 
-#if (PIO_MEASURE_ATOMIC == 1 )
+#if (DEMO_PIO_MEASURE_ATOMIC == 1 )
    //enable PIO Clock
    PMC->PMC_PCER0 = 1 << ID_PIOA; 
    //Set default state to 0
@@ -77,7 +77,7 @@ int __low_level_init( void )
    // Configure pin as output
    PIOA->PIO_OER = PIO_PA24;
    PIOA->PIO_PER = PIO_PA24;
-#elif (PIO_MEASURE_CALL == 1 )
+#elif (DEMO_PIO_MEASURE_CALL == 1 )
     pmc_enable_periph_clk(ID_PIOA);
     pio_configure(PIOA,PIO_OUTPUT_0,PIO_PA24,PIO_DEFAULT);
 #endif
