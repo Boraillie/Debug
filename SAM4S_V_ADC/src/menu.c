@@ -34,24 +34,26 @@ extern const char reset_source_msg[7][10]; // v_utils.c
 #define MENU_STRING_LENGTH 50
 char menu_choice_msg[MENU_NB_OPTIONS][MENU_STRING_LENGTH]={\
 //                          "====================MAXLENGTH====================
-                            " 0 -> Turn on D0 LED  \n\r",\
+                            " 0 -> Perform a Software Reset  \n\r",\
                             " 1 -> Turn off D0 LED \n\r",\
-                            " 2 -> Get SW0 state   \n\r",\
-                            " 3 -> Perform a Software Reset \n\r"};
+                            " 2 -> Turn on D0 LED   \n\r",\
+                            " 3 -> Get SW0 state \n\r",\
+                            " 4 -> Start Sleep mode \n\r",\  
+                            " 5 -> Start Wait mode \n\r"};
+
 //                          "====================MAXLENGTH====================
 // -----------------------------------------------------------------------------
 //  Function Name       : menu_option_xx
 //  Object              : menu option routines
 // -----------------------------------------------------------------------------
+
 void menu_option_0(void)
 {
   DEBUG_Printk("\n\r\n\r");
-  DEBUG_Printk("  =========== Turning on LEDs D0 ========\n\r");
-  BRD_TURN_ON_D0;
-  DEBUG_Printk("\n\r");
-  DEBUG_Printk("  =========== Press a key ===============\n\r");
+  DEBUG_Printk("  =========== Performing a Software Reset ==\n\r");
+  rstc_software_reset(RSTC,RSTC_PROCRST) ;
+  //DEBUG_Printk("  =========== Press a key ===============\n\r");
 }
-
 void menu_option_1(void)
 {
   DEBUG_Printk("\n\r\n\r");
@@ -60,8 +62,15 @@ void menu_option_1(void)
   DEBUG_Printk("\n\r");
   DEBUG_Printk("  =========== Press a key ===============\n\r");
 }
-
 void menu_option_2(void)
+{
+  DEBUG_Printk("\n\r\n\r");
+  DEBUG_Printk("  =========== Turning on LEDs D0 ========\n\r");
+  BRD_TURN_ON_D0;
+  DEBUG_Printk("\n\r");
+  DEBUG_Printk("  =========== Press a key ===============\n\r");
+}
+void menu_option_3(void)
 {
   DEBUG_Printk("\n\r\n\r");
   DEBUG_Printk("  =========== Get SW0 state ==\n\r");
@@ -70,14 +79,14 @@ void menu_option_2(void)
   //DEBUG_Printk("  =========== Press a key ===============\n\r");
 }
 
-void menu_option_3(void)
+
+void menu_option_4(void)
 {
   DEBUG_Printk("\n\r\n\r");
-  DEBUG_Printk("  =========== Performing a Software Reset ==\n\r");
-  rstc_software_reset(RSTC,RSTC_PROCRST) ;
+  DEBUG_Printk("  =========== Enter wait modee ==\n\r");
+  
   //DEBUG_Printk("  =========== Press a key ===============\n\r");
 }
-
 
 
 

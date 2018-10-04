@@ -111,12 +111,16 @@
 // ----------------------------------------------------------------------------
 
 //DEMOS
-
-#define DEMO_PIPELINE           (0)
-#define DEMO_PIO_MEASURE_ATOMIC      (0)
-#define DEMO_PIO_MEASURE_CALL        (1)
+#define DEMO_PIPELINE                   (0)
+#define DEMO_PIO_MEASURE_ATOMIC         (0)
+#define DEMO_PIO_MEASURE_CALL           (1)
 
 //BUG LIST 
+#define BUG_WDT                         (0)
+
+
+
+
 
 //#define DONT_USE_CMSIS_INIT //system_samxxx files
 
