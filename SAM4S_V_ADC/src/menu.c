@@ -26,20 +26,30 @@ char message[80];
 unsigned int MenuChoice;
 extern unsigned int MCK_clock_speed;       // main.c
 extern const char reset_source_msg[7][10]; // v_utils.c
-
+#pragma location = 0x200080cc
+const uint32_t dummy_table[100]={0};
 
 
 // -----------------------------------------------------------------------------
-#define MENU_NB_OPTIONS     4 // max=10
-#define MENU_STRING_LENGTH 50
+#define MENU_NB_OPTIONS     6 // max=10
+
+#if ( BUG_PRINTF == 1 )
+  #define MENU_STRING_LENGTH 34
+  #pragma location = 0x20008000
+#else 
+  #define MENU_STRING_LENGTH 40
+#endif
+
+
+
 char menu_choice_msg[MENU_NB_OPTIONS][MENU_STRING_LENGTH]={\
-//                          "====================MAXLENGTH====================
-                            " 0 -> Perform a Software Reset  \n\r",\
-                            " 1 -> Turn off D0 LED \n\r",\
-                            " 2 -> Turn on D0 LED   \n\r",\
-                            " 3 -> Get SW0 state \n\r",\
-                            " 4 -> Start Sleep mode \n\r",\  
-                            " 5 -> Start Wait mode \n\r"};
+  //                          "====================MAXLENGTH===================
+                              " 0 -> Perform a Software Reset  \n\r",\
+                              " 1 -> Turn off D0 LED \n\r",\
+                              " 2 -> Turn on D0 LED   \n\r",\
+                              " 3 -> Get SW0 state \n\r",\
+                              " 4 -> Start Sleep mode \n\r",\
+                              " 5 -> Start Wait mode           \n\r"};
 
 //                          "====================MAXLENGTH====================
 // -----------------------------------------------------------------------------
@@ -190,8 +200,14 @@ void get_and_check_chipid(uint32_t* chip_id, uint32_t* chip_exid)
 // -----------------------------------------------------------------------------
 void run_menu(void)
 {
+  
+   volatile int keep_dummy_table = dummy_table[0];
+   memset(dummy_table,0x40,sizeof(dummy_table));
+   
    Print_device_info();
    Print_menu();
+
+   
  
 
 #if (DEMO_PIO_MEASURE_ATOMIC == 1 )

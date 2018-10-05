@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V7.40.1.8447/W32 for ARM                 03/Oct/2018  11:09:11
+# IAR ELF Linker V7.40.1.8447/W32 for ARM                 05/Oct/2018  12:34:59
 # Copyright 2007-2015 IAR Systems AB.
 #
 #    Output file  =  
@@ -85,7 +85,7 @@ __SystemLibrary = DLib
   .intvec                 const    0x20000000    0xcc  IAR_SAM3S_cstartup.o [1]
                                  - 0x200000cc    0xcc
 
-"P1":                                          0x18ac
+"P1":                                          0x1948
   .prg_used_utils_functions
                           ro code  0x200000cc   0x2e4  v_utils.o [1]
   .prg_used_drv_functions
@@ -96,63 +96,66 @@ __SystemLibrary = DLib
   .prg_used_drv_functions
                           ro code  0x20000862    0xbc  v_supc.o [1]
   .text                   ro code  0x2000091e    0x22  zero_init3.o [4]
-  .text                   ro code  0x20000940   0x264  menu.o [1]
-  .text                   ro code  0x20000ba4    0x8c  v_debug.o [1]
+  .text                   ro code  0x20000940   0x268  menu.o [1]
+  .text                   ro code  0x20000ba8    0x8c  v_debug.o [1]
+  .text                   ro code  0x20000c34     0xc  rstc.o [1]
   .prg_used_drv_functions
-                          ro code  0x20000c30   0x1ca  pio.o [1]
+                          ro code  0x20000c40   0x1ca  pio.o [1]
   .prg_used_drv_functions
-                          ro code  0x20000dfa     0xe  v_pio.o [1]
-  .text                   ro code  0x20000e08    0x34  sprintf.o [3]
-  .text                   ro code  0x20000e3c    0x8e  uart.o [1]
-  .text                   ro code  0x20000eca     0xa  xsprout.o [3]
+                          ro code  0x20000e0a     0xe  v_pio.o [1]
+  .text                   ro code  0x20000e18    0x8e  uart.o [1]
+  .text                   ro code  0x20000ea6     0xa  xsprout.o [3]
+  .text                   ro code  0x20000eb0    0x34  sprintf.o [3]
+  .text                   ro code  0x20000ee4    0x14  memset.o [3]
   .prg_used_drv_functions
-                          ro code  0x20000ed4    0x54  pmc.o [1]
+                          ro code  0x20000ef8    0x54  pmc.o [1]
   .prg_used_utils_functions
-                          ro code  0x20000f28    0x18  v_it_management.o [1]
-  .text                   ro code  0x20000f40   0x14e  xprintftiny.o [3]
+                          ro code  0x20000f4c    0x18  v_it_management.o [1]
+  .text                   ro code  0x20000f64   0x14e  xprintftiny.o [3]
+  .text                   ro code  0x200010b4    0x66  ABImemset.o [4]
   .prg_used_drv_functions
-                          ro code  0x20001090    0x74  v_nvic.o [1]
-  .text                   ro code  0x20001104    0x36  strlen.o [4]
-  .text                   ro code  0x2000113c   0x178  main.o [1]
-  .text                   ro code  0x200012b4    0x28  v_utils.o [1]
+                          ro code  0x2000111c    0x74  v_nvic.o [1]
+  .text                   ro code  0x20001190    0x36  strlen.o [4]
+  .text                   ro code  0x200011c8   0x178  main.o [1]
+  .text                   ro code  0x20001340    0x28  v_utils.o [1]
   .prg_used_utils_functions
-                          ro code  0x200012dc    0x28  v_relocate.o [1]
-  .text                   ro code  0x20001304     0xc  main.o [1]
-  .text                   ro code  0x20001310    0xaa  IAR_SAM3S_cstartup.o [1]
-  .rodata                 const    0x200013bc    0x98  v_utils.o [1]
-  .rodata                 const    0x20001454    0x40  menu.o [1]
-  .rodata                 const    0x20001494    0x40  menu.o [1]
-  .rodata                 const    0x200014d4    0x3c  menu.o [1]
-  .rodata                 const    0x20001510    0x38  menu.o [1]
-  .rodata                 const    0x20001548    0x30  menu.o [1]
-  .rodata                 const    0x20001578    0x2c  menu.o [1]
-  .rodata                 const    0x200015a4    0x2c  menu.o [1]
-  .rodata                 const    0x200015d0    0x2c  menu.o [1]
-  .rodata                 const    0x200015fc    0x2c  menu.o [1]
-  .text                   ro code  0x20001628    0x2c  copy_init3.o [4]
-  .text                   ro code  0x20001654    0x28  data_init.o [4]
-  .rodata                 const    0x2000167c    0x24  main.o [1]
-  .rodata                 const    0x200016a0    0x24  main.o [1]
-  .rodata                 const    0x200016c4    0x24  menu.o [1]
-  .iar.init_table         const    0x200016e8    0x24  - Linker created -
-  .rodata                 const    0x2000170c    0x1c  menu.o [1]
-  .text                   ro code  0x20001728    0x1a  cmain.o [4]
-  .text                   ro code  0x20001742     0x4  exit.o [3]
-  .text                   ro code  0x20001748     0xa  cexit.o [4]
-  .text                   ro code  0x20001754     0xc  XXexit.o [4]
-  .rodata                 const    0x20001760    0x18  menu.o [1]
-  .rodata                 const    0x20001778    0x14  menu.o [1]
-  .rodata                 const    0x2000178c    0x14  menu.o [1]
-  .rodata                 const    0x200017a0    0x10  menu.o [1]
-  .rodata                 const    0x200017b0    0x10  menu.o [1]
-  .text                   ro code  0x200017c0     0xc  cstartup_M.o [4]
-  .rodata                 const    0x200017cc     0x8  main.o [1]
-  .rodata                 const    0x200017d4     0x8  main.o [1]
-  .rodata                 const    0x200017dc     0x8  menu.o [1]
-  .rodata                 const    0x200017e4     0x0  zero_init3.o [4]
-  .rodata                 const    0x200017e4     0x0  copy_init3.o [4]
-  Initializer bytes       const    0x200017e4   0x194  <for P2 s0>
-                                 - 0x20001978  0x18ac
+                          ro code  0x20001368    0x28  v_relocate.o [1]
+  .text                   ro code  0x20001390     0xc  main.o [1]
+  Initializer bytes       const    0x2000139c    0xcc  <for Absolute sections 1-1>
+  .text                   ro code  0x20001468    0xaa  IAR_SAM3S_cstartup.o [1]
+  .rodata                 const    0x20001514    0x98  v_utils.o [1]
+  .rodata                 const    0x200015ac    0x40  menu.o [1]
+  .rodata                 const    0x200015ec    0x40  menu.o [1]
+  .rodata                 const    0x2000162c    0x3c  menu.o [1]
+  .rodata                 const    0x20001668    0x38  menu.o [1]
+  .rodata                 const    0x200016a0    0x30  menu.o [1]
+  .rodata                 const    0x200016d0    0x30  menu.o [1]
+  .rodata                 const    0x20001700    0x2c  menu.o [1]
+  .rodata                 const    0x2000172c    0x2c  menu.o [1]
+  .rodata                 const    0x20001758    0x2c  menu.o [1]
+  .rodata                 const    0x20001784    0x2c  menu.o [1]
+  .text                   ro code  0x200017b0    0x2c  copy_init3.o [4]
+  .text                   ro code  0x200017dc    0x28  data_init.o [4]
+  .rodata                 const    0x20001804    0x24  main.o [1]
+  .rodata                 const    0x20001828    0x24  main.o [1]
+  .iar.init_table         const    0x2000184c    0x38  - Linker created -
+  .rodata                 const    0x20001884    0x1c  menu.o [1]
+  .text                   ro code  0x200018a0    0x1a  cmain.o [4]
+  .text                   ro code  0x200018ba     0x4  exit.o [3]
+  .text                   ro code  0x200018c0     0xa  cexit.o [4]
+  .text                   ro code  0x200018cc     0xc  XXexit.o [4]
+  .rodata                 const    0x200018d8    0x18  menu.o [1]
+  .rodata                 const    0x200018f0    0x14  menu.o [1]
+  .rodata                 const    0x20001904    0x10  menu.o [1]
+  .rodata                 const    0x20001914    0x10  menu.o [1]
+  .text                   ro code  0x20001924     0xc  cstartup_M.o [4]
+  .rodata                 const    0x20001930     0x8  main.o [1]
+  .rodata                 const    0x20001938     0x8  main.o [1]
+  .rodata                 const    0x20001940     0x8  menu.o [1]
+  .rodata                 const    0x20001948     0x0  zero_init3.o [4]
+  .rodata                 const    0x20001948     0x0  copy_init3.o [4]
+  Initializer bytes       const    0x20001948    0xcc  <for P2 s0>
+                                 - 0x20001a14  0x1948
 
 "A1":                                            0x1c
   .info_section           const    0x20007fe0     0xc  main.o [1]
@@ -163,17 +166,25 @@ __SystemLibrary = DLib
   .checksum               const    0x20007ffc     0x4  Place holder __checksum
                                  - 0x20008000     0x4
 
-"P2":                                           0x9f0
-  P2 s0                            0x20008000   0x194  <Init block>
-    .data                 inited   0x20008000    0xcc  IAR_SAM3S_cstartup.o [1]
-    .data                 inited   0x200080cc    0xc8  menu.o [1]
-  .bss                    zero     0x20008194    0x50  menu.o [1]
-  .bss                    zero     0x200081e4     0x4  main.o [1]
-  .bss                    zero     0x200081e8     0x4  main.o [1]
-  .bss                    zero     0x200081ec     0x4  menu.o [1]
-  CSTACK                           0x200081f0   0x800  <Block>
-    CSTACK                uninit   0x200081f0   0x800  <Block tail>
-                                 - 0x200089f0   0x9f0
+Absolute sections, part 1 of 2:                  0xcc
+  Absolute sections 1-1            0x20008000    0xcc  <Init block>
+    .data                 inited   0x20008000    0xcc  menu.o [1]
+                                 - 0x200080cc    0xcc
+
+Absolute sections, part 2 of 2:                 0x190
+  .rodata                 const    0x200080cc   0x190  menu.o [1]
+                                 - 0x2000825c   0x190
+
+"P2":                                           0x928
+  P2 s0                            0x20008300    0xcc  <Init block>
+    .data                 inited   0x20008300    0xcc  IAR_SAM3S_cstartup.o [1]
+  .bss                    zero     0x200083cc    0x50  menu.o [1]
+  .bss                    zero     0x2000841c     0x4  main.o [1]
+  .bss                    zero     0x20008420     0x4  main.o [1]
+  .bss                    zero     0x20008424     0x4  menu.o [1]
+  CSTACK                           0x20008428   0x800  <Block>
+    CSTACK                uninit   0x20008428   0x800  <Block tail>
+                                 - 0x20008c28   0x928
 
 
 *******************************************************************************
@@ -184,13 +195,19 @@ __SystemLibrary = DLib
           -------     ----
 Zero (__iar_zero_init3)
     1 destination range, total size 0x5c:
-          0x20008194   0x5c
+          0x200083cc  0x5c
 
 Copy (__iar_copy_init3)
-    1 source range, total size 0x194:
-          0x200017e4  0x194
-    1 destination range, total size 0x194:
-          0x20008000  0x194
+    1 source range, total size 0xcc:
+          0x2000139c  0xcc
+    1 destination range, total size 0xcc:
+          0x20008000  0xcc
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0xcc:
+          0x20001948  0xcc
+    1 destination range, total size 0xcc:
+          0x20008300  0xcc
 
 
 
@@ -198,14 +215,16 @@ Copy (__iar_copy_init3)
 *** MODULE SUMMARY
 ***
 
-    Module                ro code  ro data  rw data
-    ------                -------  -------  -------
+    Module                ro code  ro data  rw data  ro data  rw data
+                                                      (abs)    (abs)
+    ------                -------  -------  -------  -------  -------
 C:\Users\M43527\Box Sync\Home\Dev\advanced_debug\SAM4S_V_ADC\compil\ISRAM\Obj: [1]
     IAR_SAM3S_cstartup.o      170      408      204
     main.o                    388      112        8
-    menu.o                    612      836      284
+    menu.o                    616      832       84      400      204
     pio.o                     458
     pmc.o                     692
+    rstc.o                     12
     uart.o                    142
     v_debug.o                 140
     v_it_management.o          24
@@ -216,22 +235,24 @@ C:\Users\M43527\Box Sync\Home\Dev\advanced_debug\SAM4S_V_ADC\compil\ISRAM\Obj: [
     v_supc.o                  188
     v_utils.o                 790      152
     v_wdt.o                   112
-    -----------------------------------------------
-    Total:                  4 358    1 508      496
+    -----------------------------------------------------------------
+    Total:                  4 374    1 504      296      400      204
 
 command line: [2]
-    -----------------------------------------------
+    -----------------------------------------------------------------
     Total:
 
 dl7M_tln.a: [3]
     exit.o                      4
+    memset.o                   20
     sprintf.o                  52
     xprintftiny.o             334
     xsprout.o                  10
-    -----------------------------------------------
-    Total:                    400
+    -----------------------------------------------------------------
+    Total:                    420
 
 rt7M_tl.a: [4]
+    ABImemset.o               102
     XXexit.o                   12
     cexit.o                    10
     cmain.o                    26
@@ -240,13 +261,13 @@ rt7M_tl.a: [4]
     data_init.o                40
     strlen.o                   54
     zero_init3.o               34
-    -----------------------------------------------
-    Total:                    232
+    -----------------------------------------------------------------
+    Total:                    334
 
-    Gaps                        8        6
-    Linker created                      36    2 048
----------------------------------------------------
-    Grand Total:            4 998    1 554    2 544
+    Gaps                       10        6
+    Linker created                      56    2 048
+---------------------------------------------------------------------
+    Grand Total:            5 138    1 570    2 344      400      204
 
 
 *******************************************************************************
@@ -255,119 +276,124 @@ rt7M_tl.a: [4]
 
 Entry                      Address   Size  Type      Object
 -----                      -------   ----  ----      ------
-.iar.init_table$$Base   0x200016e8          --   Gb  - Linker created -
-.iar.init_table$$Limit  0x2000170c          --   Gb  - Linker created -
-?main                   0x20001729         Code  Gb  cmain.o [4]
-ACC_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-ADC_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-BusFault_Handler        0x200013ab    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-CRCCU_IrqHandler        0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-CSTACK$$Base            0x200081f0          --   Gb  - Linker created -
-CSTACK$$Limit           0x200089f0          --   Gb  - Linker created -
-DACC_IrqHandler         0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-DEBUG_Initialize        0x20000bd9   0x50  Code  Gb  v_debug.o [1]
-DEBUG_Printk            0x20000bb3   0x26  Code  Gb  v_debug.o [1]
-DEBUG_Ready             0x20000ba5    0xe  Code  Gb  v_debug.o [1]
-DebugMon_Handler        0x200013b1    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-Dummy_Handler           0x200013b9    0x2  Code  Gb  IAR_SAM3S_cstartup.o [1]
-EEFC_IrqHandler         0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-HSMCI_IrqHandler        0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-HardFault_Handler       0x200013a7    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-IrqHandlerNotUsed       0x200013b7    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-MCK_clock_speed         0x200081e4    0x4  Data  Gb  main.o [1]
-MemManage_Handler       0x200013a9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-MenuChoice              0x200081ec    0x4  Data  Gb  menu.o [1]
-NMI_Handler             0x200013a5    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-PIOA_IrqHandler         0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-PIOB_IrqHandler         0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-PIOC_IrqHandler         0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-PIO_Init                0x2000113d   0x62  Code  Gb  main.o [1]
-PMC_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-PWM_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-PendSV_Handler          0x200013b3    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-Print_device_info       0x20000a01   0x66  Code  Gb  menu.o [1]
-Print_menu              0x200009cd   0x34  Code  Gb  menu.o [1]
-RSTC_IrqHandler         0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-RTC_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-RTT_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-Region$$Table$$Base     0x200016e8          --   Gb  - Linker created -
-Region$$Table$$Limit    0x2000170c          --   Gb  - Linker created -
-SMC_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-SPI_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-SSC_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-SUPC_IrqHandler         0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-SVC_Handler             0x200013af    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-SysTick_Handler         0x200013b5    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-TC0_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-TC1_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-TC2_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-TC3_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-TC4_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-TC5_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-TWI0_IrqHandler         0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-TWI1_IrqHandler         0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-UART0_IrqHandler        0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-UART1_IrqHandler        0x200009b9   0x14  Code  Gb  menu.o [1]
-USART0_IrqHandler       0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-USART1_IrqHandler       0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-USBD_IrqHandler         0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-UsageFault_Handler      0x200013ad    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
-Valid_DebugTrace        0x20001305    0xc  Code  Gb  main.o [1]
-WDT_IrqHandler          0x200013b9    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+.iar.init_table$$Base   0x2000184c          --   Gb  - Linker created -
+.iar.init_table$$Limit  0x20001884          --   Gb  - Linker created -
+?main                   0x200018a1         Code  Gb  cmain.o [4]
+ACC_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+ADC_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+BusFault_Handler        0x20001503    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+CRCCU_IrqHandler        0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+CSTACK$$Base            0x20008428          --   Gb  - Linker created -
+CSTACK$$Limit           0x20008c28          --   Gb  - Linker created -
+DACC_IrqHandler         0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+DEBUG_Initialize        0x20000bdd   0x50  Code  Gb  v_debug.o [1]
+DEBUG_Printk            0x20000bb7   0x26  Code  Gb  v_debug.o [1]
+DEBUG_Ready             0x20000ba9    0xe  Code  Gb  v_debug.o [1]
+DebugMon_Handler        0x20001509    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+Dummy_Handler           0x20001511    0x2  Code  Gb  IAR_SAM3S_cstartup.o [1]
+EEFC_IrqHandler         0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+HSMCI_IrqHandler        0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+HardFault_Handler       0x200014ff    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+IrqHandlerNotUsed       0x2000150f    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+MCK_clock_speed         0x2000841c    0x4  Data  Gb  main.o [1]
+MemManage_Handler       0x20001501    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+MenuChoice              0x20008424    0x4  Data  Gb  menu.o [1]
+NMI_Handler             0x200014fd    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+PIOA_IrqHandler         0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+PIOB_IrqHandler         0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+PIOC_IrqHandler         0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+PIO_Init                0x200011c9   0x62  Code  Gb  main.o [1]
+PMC_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+PWM_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+PendSV_Handler          0x2000150b    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+Print_device_info       0x200009ed   0x66  Code  Gb  menu.o [1]
+Print_menu              0x200009b9   0x34  Code  Gb  menu.o [1]
+RSTC_IrqHandler         0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+RTC_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+RTT_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+Region$$Table$$Base     0x2000184c          --   Gb  - Linker created -
+Region$$Table$$Limit    0x20001884          --   Gb  - Linker created -
+SMC_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+SPI_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+SSC_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+SUPC_IrqHandler         0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+SVC_Handler             0x20001507    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+SysTick_Handler         0x2000150d    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+TC0_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+TC1_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+TC2_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+TC3_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+TC4_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+TC5_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+TWI0_IrqHandler         0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+TWI1_IrqHandler         0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+UART0_IrqHandler        0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+UART1_IrqHandler        0x200009a5   0x14  Code  Gb  menu.o [1]
+USART0_IrqHandler       0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+USART1_IrqHandler       0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+USBD_IrqHandler         0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+UsageFault_Handler      0x20001505    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
+Valid_DebugTrace        0x20001391    0xc  Code  Gb  main.o [1]
+WDT_IrqHandler          0x20001511    0x2  Code  Wk  IAR_SAM3S_cstartup.o [1]
 _LINK_TO_ISRAM_ {Abs}   0x00000001          --   Gb  command line/config [2]
-_PrintfTiny             0x20000f59  0x136  Code  Gb  xprintftiny.o [3]
-_SProut                 0x20000ecb    0xa  Code  Gb  xsprout.o [3]
+_PrintfTiny             0x20000f7d  0x136  Code  Gb  xprintftiny.o [3]
+_SProut                 0x20000ea7    0xa  Code  Gb  xsprout.o [3]
+__aeabi_memset          0x200010b5         Code  Gb  ABImemset.o [4]
 __checksum              0x20007ffc    0x4  Data  Gb  Place holder __checksum
 __checksum_begin {Abs}  0x20000000          --   Gb  command line/config [2]
 __checksum_end {Abs}    0x20007fdf          --   Gb  command line/config [2]
-__cmain                 0x20001729         Code  Gb  cmain.o [4]
-__exit                  0x20001755         Code  Gb  XXexit.o [4]
-__iar_copy_init3        0x20001629   0x2c  Code  Gb  copy_init3.o [4]
-__iar_data_init3        0x20001655   0x28  Code  Gb  data_init.o [4]
-__iar_program_start     0x200017c1         Code  Gb  cstartup_M.o [4]
+__cmain                 0x200018a1         Code  Gb  cmain.o [4]
+__exit                  0x200018cd         Code  Gb  XXexit.o [4]
+__iar_Memset            0x200010b5         Code  Gb  ABImemset.o [4]
+__iar_Memset_word       0x200010bd         Code  Gb  ABImemset.o [4]
+__iar_copy_init3        0x200017b1   0x2c  Code  Gb  copy_init3.o [4]
+__iar_data_init3        0x200017dd   0x28  Code  Gb  data_init.o [4]
+__iar_program_start     0x20001925         Code  Gb  cstartup_M.o [4]
 __iar_zero_init3        0x2000091f   0x22  Code  Gb  zero_init3.o [4]
-__low_level_init        0x20001311   0x76  Code  Gb  IAR_SAM3S_cstartup.o [1]
+__low_level_init        0x20001469   0x76  Code  Gb  IAR_SAM3S_cstartup.o [1]
 __vector_table          0x20000000   0xcc  Data  Gb  IAR_SAM3S_cstartup.o [1]
-_call_main              0x20001735         Code  Gb  cmain.o [4]
+_call_main              0x200018ad         Code  Gb  cmain.o [4]
 _date                   0x20007fe0    0xc  Data  Gb  main.o [1]
-_exit                   0x20001749         Code  Gb  cexit.o [4]
-_main                   0x2000173f         Code  Gb  cmain.o [4]
+_exit                   0x200018c1         Code  Gb  cexit.o [4]
+_main                   0x200018b7         Code  Gb  cmain.o [4]
 _time                   0x20007ff0    0xc  Data  Gb  main.o [1]
-binary_tag              0x200081e8    0x4  Data  Gb  main.o [1]
+binary_tag              0x20008420    0x4  Data  Gb  main.o [1]
 brownout_detector_enable
                         0x20000345   0x10  Code  Gb  v_utils.o [1]
 check_reset_source      0x200002df   0x28  Code  Gb  v_utils.o [1]
-config_clocks           0x200012b5   0x28  Code  Gb  v_utils.o [1]
-disable_interrupt       0x20000f35    0xc  Code  Gb  v_it_management.o [1]
-enable_interrupt        0x20000f29    0xc  Code  Gb  v_it_management.o [1]
-exit                    0x20001743    0x4  Code  Gb  exit.o [3]
+config_clocks           0x20001341   0x28  Code  Gb  v_utils.o [1]
+disable_interrupt       0x20000f59    0xc  Code  Gb  v_it_management.o [1]
+dummy_table             0x200080cc  0x190  Data  Gb  menu.o [1]
+enable_interrupt        0x20000f4d    0xc  Code  Gb  v_it_management.o [1]
+exit                    0x200018bb    0x4  Code  Gb  exit.o [3]
 external_reset_disable  0x200000d5    0xa  Code  Gb  v_utils.o [1]
 external_reset_enable   0x200000cd    0x8  Code  Gb  v_utils.o [1]
-get_and_check_chipid    0x20000a67   0x42  Code  Gb  menu.o [1]
-main                    0x200011f1   0x80  Code  Gb  main.o [1]
-menu_choice_msg         0x200080cc   0xc8  Data  Gb  menu.o [1]
-menu_option_0           0x20000941   0x26  Code  Gb  menu.o [1]
-menu_option_1           0x20000967   0x26  Code  Gb  menu.o [1]
-menu_option_2           0x2000098d   0x2c  Code  Gb  menu.o [1]
-message                 0x20008194   0x50  Data  Gb  menu.o [1]
-new_vector_table        0x20008000   0xcc  Data  Gb  IAR_SAM3S_cstartup.o [1]
-nvic_disable_it         0x200010cb   0x2e  Code  Gb  v_nvic.o [1]
-nvic_enable_it          0x20001091   0x3a  Code  Gb  v_nvic.o [1]
-out                     0x20000f41   0x18  Code  Lc  xprintftiny.o [3]
-pio_clear               0x20000c41    0x4  Code  Gb  pio.o [1]
-pio_configure           0x20000d7d   0x74  Code  Gb  pio.o [1]
-pio_disable_interrupt   0x20000df7    0x4  Code  Gb  pio.o [1]
-pio_enable_interrupt    0x20000df1    0x6  Code  Gb  pio.o [1]
-pio_get                 0x20000c45   0x28  Code  Gb  pio.o [1]
-pio_pull_up             0x20000c31    0xc  Code  Gb  pio.o [1]
-pio_set                 0x20000c3d    0x4  Code  Gb  pio.o [1]
-pio_set_input           0x20000cff   0x40  Code  Gb  pio.o [1]
-pio_set_output          0x20000d3f   0x3e  Code  Gb  pio.o [1]
-pio_set_peripheral      0x20000c6d   0x92  Code  Gb  pio.o [1]
-pio_toggle              0x20000dfb    0xe  Code  Gb  v_pio.o [1]
+get_and_check_chipid    0x20000a53   0x42  Code  Gb  menu.o [1]
+main                    0x2000127d   0x80  Code  Gb  main.o [1]
+memset                  0x20000ee5   0x14  Code  Gb  memset.o [3]
+menu_choice_msg         0x20008000   0xcc  Data  Gb  menu.o [1]
+menu_option_0           0x20000941   0x18  Code  Gb  menu.o [1]
+menu_option_1           0x20000959   0x26  Code  Gb  menu.o [1]
+menu_option_2           0x2000097f   0x26  Code  Gb  menu.o [1]
+message                 0x200083cc   0x50  Data  Gb  menu.o [1]
+new_vector_table        0x20008300   0xcc  Data  Gb  IAR_SAM3S_cstartup.o [1]
+nvic_disable_it         0x20001157   0x2e  Code  Gb  v_nvic.o [1]
+nvic_enable_it          0x2000111d   0x3a  Code  Gb  v_nvic.o [1]
+out                     0x20000f65   0x18  Code  Lc  xprintftiny.o [3]
+pio_clear               0x20000c51    0x4  Code  Gb  pio.o [1]
+pio_configure           0x20000d8d   0x74  Code  Gb  pio.o [1]
+pio_disable_interrupt   0x20000e07    0x4  Code  Gb  pio.o [1]
+pio_enable_interrupt    0x20000e01    0x6  Code  Gb  pio.o [1]
+pio_get                 0x20000c55   0x28  Code  Gb  pio.o [1]
+pio_pull_up             0x20000c41    0xc  Code  Gb  pio.o [1]
+pio_set                 0x20000c4d    0x4  Code  Gb  pio.o [1]
+pio_set_input           0x20000d0f   0x40  Code  Gb  pio.o [1]
+pio_set_output          0x20000d4f   0x3e  Code  Gb  pio.o [1]
+pio_set_peripheral      0x20000c7d   0x92  Code  Gb  pio.o [1]
+pio_toggle              0x20000e0b    0xe  Code  Gb  v_pio.o [1]
 pmc_disable_pllack      0x20000455    0xa  Code  Gb  pmc.o [1]
 pmc_enable_pck          0x2000064d    0xc  Code  Gb  pmc.o [1]
-pmc_enable_periph_clk   0x20000ed5   0x54  Code  Gb  pmc.o [1]
+pmc_enable_periph_clk   0x20000ef9   0x54  Code  Gb  pmc.o [1]
 pmc_enable_pllack       0x20000421   0x34  Code  Gb  pmc.o [1]
 pmc_switch_mainck_to_fastrc
                         0x2000045f   0x82  Code  Gb  pmc.o [1]
@@ -380,13 +406,14 @@ pmc_switch_pck_to_mainck
                         0x20000619   0x34  Code  Gb  pmc.o [1]
 pmc_switch_pck_to_mck   0x2000074d   0x3e  Code  Gb  v_pmc.o [1]
 pmc_switch_pck_to_sclk  0x200005e9   0x30  Code  Gb  pmc.o [1]
-relocate_int_table      0x200012dd   0x28  Code  Gb  v_relocate.o [1]
-reset_source_msg        0x200013bc   0x98  Data  Gb  v_utils.o [1]
-run_menu                0x20000aad   0x80  Code  Gb  menu.o [1]
-set_PCK_output          0x2000119f   0x52  Code  Gb  main.o [1]
+relocate_int_table      0x20001369   0x28  Code  Gb  v_relocate.o [1]
+reset_source_msg        0x20001514   0x98  Data  Gb  v_utils.o [1]
+rstc_software_reset     0x20000c35    0xc  Code  Gb  rstc.o [1]
+run_menu                0x20000a99   0x92  Code  Gb  menu.o [1]
+set_PCK_output          0x2000122b   0x52  Code  Gb  main.o [1]
 set_clocks              0x2000012d  0x1b2  Code  Gb  v_utils.o [1]
-sprintf                 0x20000e09   0x34  Code  Gb  sprintf.o [3]
-strlen                  0x20001105         Code  Gb  strlen.o [4]
+sprintf                 0x20000eb1   0x34  Code  Gb  sprintf.o [3]
+strlen                  0x20001191         Code  Gb  strlen.o [4]
 supc_disable_brownout_detector
                         0x20000893   0x10  Code  Gb  v_supc.o [1]
 supc_disable_brownout_resetsignal
@@ -413,15 +440,15 @@ supc_set_monitor_threshold
                         0x200008c3   0x16  Code  Gb  v_supc.o [1]
 supply_monitor_disable  0x20000377    0xc  Code  Gb  v_utils.o [1]
 supply_monitor_enable   0x20000355   0x22  Code  Gb  v_utils.o [1]
-uart_enable_interrupt   0x20000e8b    0x4  Code  Gb  uart.o [1]
-uart_enable_rx          0x20000e7f    0x6  Code  Gb  uart.o [1]
-uart_enable_tx          0x20000e79    0x6  Code  Gb  uart.o [1]
-uart_init               0x20000e3d   0x3c  Code  Gb  uart.o [1]
-uart_is_tx_empty        0x20000e99    0xa  Code  Gb  uart.o [1]
-uart_is_tx_ready        0x20000e8f    0xa  Code  Gb  uart.o [1]
-uart_read               0x20000eb7   0x14  Code  Gb  uart.o [1]
-uart_reset_rx           0x20000e85    0x6  Code  Gb  uart.o [1]
-uart_write              0x20000ea3   0x14  Code  Gb  uart.o [1]
+uart_enable_interrupt   0x20000e67    0x4  Code  Gb  uart.o [1]
+uart_enable_rx          0x20000e5b    0x6  Code  Gb  uart.o [1]
+uart_enable_tx          0x20000e55    0x6  Code  Gb  uart.o [1]
+uart_init               0x20000e19   0x3c  Code  Gb  uart.o [1]
+uart_is_tx_empty        0x20000e75    0xa  Code  Gb  uart.o [1]
+uart_is_tx_ready        0x20000e6b    0xa  Code  Gb  uart.o [1]
+uart_read               0x20000e93   0x14  Code  Gb  uart.o [1]
+uart_reset_rx           0x20000e61    0x6  Code  Gb  uart.o [1]
+uart_write              0x20000e7f   0x14  Code  Gb  uart.o [1]
 v_pmc_enable_pllbck     0x2000078b   0x24  Code  Gb  v_pmc.o [1]
 v_pmc_switch_mck_to_mainck
                         0x20000681   0x5e  Code  Gb  v_pmc.o [1]
@@ -442,9 +469,9 @@ wdt_enable              0x200003b1   0x60  Code  Gb  v_wdt.o [1]
 [3] = dl7M_tln.a
 [4] = rt7M_tl.a
 
-  4 998 bytes of readonly  code memory
-  1 554 bytes of readonly  data memory
-  2 544 bytes of readwrite data memory
+  5 138 bytes of readonly  code memory
+  1 570 bytes of readonly  data memory (+ 400 absolute)
+  2 344 bytes of readwrite data memory (+ 204 absolute)
 
 Errors: none
 Warnings: none

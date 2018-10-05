@@ -117,6 +117,7 @@
 
 //BUG LIST 
 #define BUG_WDT                         (0)
+#define BUG_PRINTF                      (1)
 
 
 

@@ -84,6 +84,7 @@ void PIO_Init (void)
 //  Object              : Enable PCK0 on AT91C_PA6_PCK0
 //                        Enable PCK1 on AT91C_PA17_PCK1
 // -----------------------------------------------------------------------------
+
 void set_PCK_output (void)
 {
    // Configure PIO controllers to periph mode
