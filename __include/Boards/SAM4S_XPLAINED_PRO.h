@@ -72,9 +72,9 @@ ______________________________________________________
 /*----------------------------------------------------------------------------*/
 /* -------- Inputs Definition                                                 */
 /*----------------------------------------------------------------------------*/
-#define BRD_BASE_PIO_SW0   PIOC       //User button
-#define BRD_ID_PIO_SW0     ID_PIOC
-#define BRD_SW0_MASK       (1<<24)	
+#define BRD_BASE_PIO_SW0   PIOA       //User button
+#define BRD_ID_PIO_SW0     ID_PIOA
+#define BRD_SW0_MASK       (1<<2)	
 
 
 #define BRD_BASE_PIO_ALL_INPUT  PIOC ///////////////////////////////////////////
