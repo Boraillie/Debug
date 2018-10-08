@@ -38,7 +38,7 @@ uint32_t dummy_table[100]={0};
  *----------------------------------------------------------------------------*/
 
 
-static uint32_t lowPowerMode = BACKUP_MODE;
+static uint32_t lowPowerMode = ACTIVE_MODE;
 
 static uint32_t interruptType;
 
@@ -323,7 +323,7 @@ static void _EnterBackupMode(void)
 {
   
 
-    _LowPower_Prepare();
+//    _LowPower_Prepare();
    
     // initialize push button for state transition
     _Init_Pushbutton_Trigger();
@@ -347,7 +347,7 @@ static void _EnterBackupMode(void)
 static void _EnterWaitMode( void )
 {
     /* Initialize PIOs for low power */
-    _LowPower_Prepare();
+    //_LowPower_Prepare();
     
     _Init_Pushbutton_Trigger();
 
@@ -384,7 +384,7 @@ static void _EnterWaitMode( void )
 static void _EnterSleepMode( void )
 {
     /* Initialize PIOs for low power */
-    _LowPower_Prepare();
+    //_LowPower_Prepare();
 
     /* Disable Brownout Detector */
     SUPC->SUPC_MR |= (uint32_t)(0xA5 << 24) | (0x01 << 13);
@@ -500,18 +500,21 @@ void run_menu(void)
            case '5':
                // --------------- Menu option 2
                menu_option_5();
+               lowPowerMode = BACKUP_MODE;
                MenuChoice=0;
                break;
                
            case '6':
                // --------------- Menu option 2
                menu_option_6();
+               lowPowerMode = WAIT_MODE;
                MenuChoice=0;
                break;
                
            case '7':
                // --------------- Menu option 2
                menu_option_7();
+               lowPowerMode = SLEEP_MODE;
                MenuChoice=0;
                break;
                
