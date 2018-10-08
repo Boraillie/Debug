@@ -24,6 +24,8 @@
 #define SLEEP_MODE 2
 #define BACKUP_MODE 3
 
+/** (SCR) Sleep deep bit */
+#define SCR_SLEEPDEEP   (0x1 <<  2)
 
 // global variables
 char message[80];
@@ -107,8 +109,9 @@ void menu_option_3(void)
 void menu_option_4(void)
 {
   DEBUG_Printk("\n\r\n\r");
-  DEBUG_Printk("  =========== Low Power Prepare ==\n\r");
+  DEBUG_Printk("  =========== Low Power Prepare... ==\n\r");
   _LowPower_Prepare(); 
+  DEBUG_Printk("  =========== Low Power Preparation done... ==\n\r");
 }
 
 void menu_option_5(void)
@@ -292,25 +295,32 @@ static void _LowPower_Prepare( void )
     SysTick->CTRL=0x04;
 
     /* TODO1.1: Disable all the peripheral clocks */
-    //xxx;
+    PMC->PMC_PCDR0 = 0xFFFFFFFF ;
+    while ( (PMC->PMC_PCSR0 & 0xFFFFFFFF) != 0 ) ;
+
+    PMC->PMC_PCDR1 = 0xFFFFFFFF ;
+    while ( (PMC->PMC_PCSR1 & 0xFFFFFFFF) != 0 ) ;
 
     /* TODO1.2: Disable USB Clock */
-    //REG_PMC_SCDR = xxx;
+    REG_PMC_SCDR = PMC_SCER_UDP;
 
    /* TODO1.3: Enable PIO function except on PA2 (IRQ pin) */
-//   PIOA->PIO_PER = xxx;
-//   PIOB->PIO_PER = xxx;
-//   PIOC->PIO_PER = xxx;
+    PIOA->PIO_PER = 0xFFFFFFFB;
+    PIOB->PIO_PER = 0xFFFFFFFF;
+    PIOC->PIO_PER = 0xFFFFFFFF;
     
    /* TODO1.4: Set all I/Os as Input except on PA2 (IRQ pin) */
-//   PIOA->PIO_ODR = xxx;
-//   PIOB->PIO_ODR = xxx;
-//   PIOC->PIO_ODR = xxx;
+    PIOA->PIO_ODR = 0xFFFFFFFB;
+    PIOB->PIO_ODR = 0xFFFFFFFF;
+    PIOC->PIO_ODR = 0xFFFFFFFF;
     
    /* TODO1.5: Disable all I/Os pull-up except on PA2 (IRQ pin) */
-//   PIOA->PIO_PUDR = xxx;
-//   PIOB->PIO_PUDR = xxx; 
-//   PIOC->PIO_PUDR = xxx;
+    PIOA->PIO_PUDR = 0xFFFFFFFB;
+    PIOB->PIO_PUDR = 0xFFFFFFFF;
+    PIOC->PIO_PUDR = 0xFFFFFFFF;
+    
+    //Set back UART LINK \TODO : Introduce unclocked + Pio bug
+    DEBUG_Initialize(MCK_clock_speed);
 
 }
 
@@ -332,13 +342,13 @@ static void _EnterBackupMode(void)
     GPBR->SYS_GPBR[0] += 1;
 
     /* TODO4.1: Enable the PA2 IRQ pin as the wake-up source */
-    //SUPC->SUPC_WUIR = xxxx;
+    SUPC->SUPC_WUIR = SUPC_WUIR_WKUPT2_LOW | BRD_SW0_WKUP_MASK;
 
     /* TOD4.2: Entry in the Backup Mode: */
     /* Set SLEEPDEEP bit */
-    //SCB->SCR |= xxxx;
+    SCB->SCR |= SCR_SLEEPDEEP;
     /* Set VROFF bit  */
-    //SUPC->SUPC_CR |= xxxx;
+    SUPC->SUPC_CR |= (SUPC_CR_KEY(0xA5) | SUPC_CR_VROFF_STOP_VREG);
 }
 
 
@@ -355,22 +365,23 @@ static void _EnterWaitMode( void )
     SUPC->SUPC_MR |= (uint32_t)(0xA5 << 24) | (0x01 << 13) ;
 
     /* TODO2.1: Switch MCK to the fast RC oscillator */
-    //xxxx;
-    
+    //SwitchMck2FastRC(FAST_RC_OSC_4MHZ, PMC_MCKR_PRES_CLK);
+    set_clocks((uint8_t)USE_RC_4MHZ,USE_MAIN_CLK,0,0,0,0,1,0,0);
     /* TODO2.2: Set WKUP2 (IRQ pin) as the fast startup event */
-    //xxxx;
+    PMC->PMC_FSMR &= (uint32_t)~0xFFFF;
+    PMC->PMC_FSMR |= PMC_FSMR_FSTT2;
 
     /* TODO2.3:  Entry in the Wait Mode: */
     /* Set LPM bit */
-    //PMC->PMC_FSMR |= xxxx;;
+    PMC->PMC_FSMR |= PMC_FSMR_LPM;
     /*Set FLPM bit */
-    //PMC->PMC_FSMR |= xxxx;;
+    PMC->PMC_FSMR |= 0x00300000;
     /* Clear SLEEPDEEP bit */
-    //SCB->SCR &= xxx;
+    SCB->SCR &= ~SCR_SLEEPDEEP;
     /* Set Flash Wait State at 0 */
-    //EFC->EEFC_FMR = (xx << 8);    
+    EFC0->EEFC_FMR = (0 << 8);     
     /* Set waitmode bit*/
-    //PMC->CKGR_MOR |= xxxx;
+    PMC->CKGR_MOR |= (CKGR_MOR_KEY(0x37) | CKGR_MOR_WAITMODE);
     while( !(PMC->PMC_SR & PMC_SR_MCKRDY) );
 
     /* Waiting for MOSCRCEN bit is cleared is strongly recommended
@@ -395,15 +406,14 @@ static void _EnterSleepMode( void )
     _Init_Pushbutton_Trigger();
 
     /* TODO3.1: Switch to the Fast RC Oscillator - 4MHz */
-    //xxxx;
-
+    set_clocks((uint8_t)USE_RC_4MHZ,USE_MAIN_CLK,0,0,0,0,4,0,0);
     /* TODO3.2: Entry in the Sleep Mode: */
     /* Clear LPM bit */
-    //PMC->PMC_FSMR &= xxxx;
+    PMC->PMC_FSMR &= ~PMC_FSMR_LPM;
     /* Clear SLEEPDEEP bit */
-    //SCB->SCR &= xxxx;
+    SCB->SCR &= ~SCR_SLEEPDEEP;
     /* Execute __WFI() function */
-    //xxxx;
+    __WFI();
 
     /* Waiting for MOSCRCEN bit is cleared is strongly recommended
     to ensure that the core will not execute undesired instructions */
@@ -419,6 +429,8 @@ static void Exit_LP_Mode(void)
    /* Restore working clock */
     if(config_clocks())
       while(1); // stop in case of error
+    DEBUG_Initialize(MCK_clock_speed);
+
 
     /* Enable Brownout Detector */
     temp = SUPC->SUPC_MR & 0x00FFFFFF;

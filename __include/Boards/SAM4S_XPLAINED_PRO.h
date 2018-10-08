@@ -75,6 +75,7 @@ ______________________________________________________
 #define BRD_BASE_PIO_SW0   PIOA       //User button
 #define BRD_ID_PIO_SW0     ID_PIOA
 #define BRD_SW0_MASK       (1<<2)	
+#define BRD_SW0_WKUP_MASK  (1<<2)
 
 
 #define BRD_BASE_PIO_ALL_INPUT  PIOC ///////////////////////////////////////////
