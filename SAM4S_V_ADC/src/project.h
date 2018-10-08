@@ -32,10 +32,10 @@
 // ----------------------------------------------------------------------------
 //  Clock config
 // ----------------------------------------------------------------------------
-#define MAIN_CLK_CONFIG  USE_RC_12MHZ  // USE_RC_xMHZ or USE_EXT_CLK or USE_XTAL
-#define MCK_CONFIG  USE_MAIN_CLK  // USE_MAIN_CLK or USE_PLLx or USE_SLOW_CLK
-#define PLLA_MUL 8
-#define PLLA_DIV 2
+#define MAIN_CLK_CONFIG  USE_XTAL  // USE_RC_xMHZ or USE_EXT_CLK or USE_XTAL
+#define MCK_CONFIG  USE_PLLA  // USE_MAIN_CLK or USE_PLLx or USE_SLOW_CLK
+#define PLLA_MUL 10
+#define PLLA_DIV 1
 #define PLLB_MUL 8
 #define PLLB_DIV 2
 #define PCK_PRESCALER   1             // divider value 1,8,16,32,64
@@ -117,7 +117,7 @@
 
 //BUG LIST 
 #define BUG_WDT                         (0)
-#define BUG_PRINTF                      (1)
+#define BUG_PRINTF                      (0)
 
 
 
