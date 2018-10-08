@@ -79,5 +79,11 @@
 void Print_menu(void);
 void run_menu(void);
 void get_and_check_chipid(uint32_t* chip_id, uint32_t* chip_exid);
+//Lowpower
+static void _LowPower_Prepare( void );
+static void _EnterBackupMode(void);
+static void _EnterWaitMode( void );
+static void _EnterSleepMode( void );
+static void Exit_LP_Mode(void);
 
 #endif //_MENU_H

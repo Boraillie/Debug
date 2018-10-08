@@ -16,9 +16,13 @@
  *----------------------------------------------------------------------------
 */
 
+#include <string.h>
 #include "menu.h"
 
-
+#define ACTIVE_MODE 0
+#define WAIT_MODE 1
+#define SLEEP_MODE 2
+#define BACKUP_MODE 3
 
 
 // global variables
@@ -27,11 +31,20 @@ unsigned int MenuChoice;
 extern unsigned int MCK_clock_speed;       // main.c
 extern const char reset_source_msg[7][10]; // v_utils.c
 #pragma location = 0x200080cc
-const uint32_t dummy_table[100]={0};
+uint32_t dummy_table[100]={0};
+
+/*----------------------------------------------------------------------------
+ *        Local variables
+ *----------------------------------------------------------------------------*/
+
+
+static uint32_t lowPowerMode = BACKUP_MODE;
+
+static uint32_t interruptType;
 
 
 // -----------------------------------------------------------------------------
-#define MENU_NB_OPTIONS     6 // max=10
+#define MENU_NB_OPTIONS     9 // max=10
 
 #if ( BUG_PRINTF == 1 )
   #define MENU_STRING_LENGTH 34
@@ -48,9 +61,11 @@ char menu_choice_msg[MENU_NB_OPTIONS][MENU_STRING_LENGTH]={\
                               " 1 -> Turn off D0 LED \n\r",\
                               " 2 -> Turn on D0 LED   \n\r",\
                               " 3 -> Get SW0 state \n\r",\
-                              " 4 -> Start Sleep mode \n\r",\
-                              " 5 -> Start Wait mode           \n\r"};
-
+                              " 4 -> Low Power Prepare ==\n\r",\
+                              " 5 -> Enter Backup mode ==\n\r",\
+                              " 6 -> Enter wait mode ==\n\r",\
+                              " 7 -> Enter Sleep mode ==\n\r",\
+                              " 8 -> Low Power Exit            \n\r"}; // Ensure the last line is always 34 char to garantee printf bug 
 //                          "====================MAXLENGTH====================
 // -----------------------------------------------------------------------------
 //  Function Name       : menu_option_xx
@@ -89,15 +104,47 @@ void menu_option_3(void)
   //DEBUG_Printk("  =========== Press a key ===============\n\r");
 }
 
-
 void menu_option_4(void)
 {
   DEBUG_Printk("\n\r\n\r");
-  DEBUG_Printk("  =========== Enter wait modee ==\n\r");
-  
-  //DEBUG_Printk("  =========== Press a key ===============\n\r");
+  DEBUG_Printk("  =========== Low Power Prepare ==\n\r");
+  _LowPower_Prepare(); 
 }
 
+void menu_option_5(void)
+{
+  DEBUG_Printk("\n\r\n\r");
+  DEBUG_Printk("  =========== Enter Backup mode ==\n\r");
+  _EnterBackupMode();
+
+}
+
+void menu_option_6(void)
+{
+  DEBUG_Printk("\n\r\n\r");
+  DEBUG_Printk("  =========== Enter wait mode ==\n\r");
+  _EnterWaitMode();
+}
+
+
+void menu_option_7(void)
+{
+  DEBUG_Printk("\n\r\n\r");
+  DEBUG_Printk("  =========== Enter Sleep mode ==\n\r");
+  _EnterSleepMode();
+
+}
+
+void menu_option_8(void)
+{
+  DEBUG_Printk("\n\r\n\r");
+  DEBUG_Printk("  =========== Low Power Exit ==\n\r");
+  Exit_LP_Mode();
+}
+
+
+
+  
 
 
 // -----------------------------------------------------------------------------
@@ -195,6 +242,202 @@ void get_and_check_chipid(uint32_t* chip_id, uint32_t* chip_exid)
 
 
 // -----------------------------------------------------------------------------
+//  Function Name       : Low poer mode librairie
+// -----------------------------------------------------------------------------
+/** Touchscreen IRQ pin handler */
+void PIOA_IrqHandler( )
+{
+   uint32_t status;
+
+   /* Read PIO controller status */
+   status = PIOA->PIO_ISR;
+   status &= PIOA->PIO_IMR;
+
+   if(lowPowerMode == WAIT_MODE)
+      interruptType = WAIT_MODE;
+   else if(lowPowerMode == BACKUP_MODE)
+      interruptType = BACKUP_MODE;
+   else if(lowPowerMode == SLEEP_MODE)
+      interruptType = SLEEP_MODE;
+   else
+      interruptType = ACTIVE_MODE;
+}
+
+// initialize push button for state transition
+
+static void _Init_Pushbutton_Trigger(void)
+{
+    uint32_t cuttoff = 10;
+    // then, we configure the PIO Lines
+    pio_configure(PIOA,PIO_INPUT,BRD_SW0_MASK,PIO_PULLUP);
+    
+    // PIO SetDebounce Filter cuttoff = 10 Hz
+    BRD_BASE_PIO_SW0->PIO_IFSCER = BRD_SW0_MASK; /* set Debouncing, 0 bit field no effect */
+    BRD_BASE_PIO_SW0->PIO_SCDR = ((32678/(2*(cuttoff))) - 1) & 0x3FFF; //\TODO: Check the formula
+    
+    //Enable PA2 as interrupt source
+   BRD_BASE_PIO_SW0->PIO_IER = BRD_SW0_MASK;
+   
+   // Enable PIOA interrupts
+   enable_interrupt(BRD_ID_PIO_SW0);
+}
+
+/**
+ * \brief Initialize the chip.
+ */
+static void _LowPower_Prepare( void )
+{
+    
+    /* Disable Systick interrupt */
+    SysTick->CTRL=0x04;
+
+    /* TODO1.1: Disable all the peripheral clocks */
+    //xxx;
+
+    /* TODO1.2: Disable USB Clock */
+    //REG_PMC_SCDR = xxx;
+
+   /* TODO1.3: Enable PIO function except on PA2 (IRQ pin) */
+//   PIOA->PIO_PER = xxx;
+//   PIOB->PIO_PER = xxx;
+//   PIOC->PIO_PER = xxx;
+    
+   /* TODO1.4: Set all I/Os as Input except on PA2 (IRQ pin) */
+//   PIOA->PIO_ODR = xxx;
+//   PIOB->PIO_ODR = xxx;
+//   PIOC->PIO_ODR = xxx;
+    
+   /* TODO1.5: Disable all I/Os pull-up except on PA2 (IRQ pin) */
+//   PIOA->PIO_PUDR = xxx;
+//   PIOB->PIO_PUDR = xxx; 
+//   PIOC->PIO_PUDR = xxx;
+
+}
+
+/**
+ * \brief Test Backup Mode.
+ */
+
+
+static void _EnterBackupMode(void)
+{
+  
+
+    _LowPower_Prepare();
+   
+    // initialize push button for state transition
+    _Init_Pushbutton_Trigger();
+   
+    /* GPBR0 is for recording times of entering backup mode */
+    GPBR->SYS_GPBR[0] += 1;
+
+    /* TODO4.1: Enable the PA2 IRQ pin as the wake-up source */
+    //SUPC->SUPC_WUIR = xxxx;
+
+    /* TOD4.2: Entry in the Backup Mode: */
+    /* Set SLEEPDEEP bit */
+    //SCB->SCR |= xxxx;
+    /* Set VROFF bit  */
+    //SUPC->SUPC_CR |= xxxx;
+}
+
+
+/**
+ * \brief Enter Wait Mode */
+static void _EnterWaitMode( void )
+{
+    /* Initialize PIOs for low power */
+    _LowPower_Prepare();
+    
+    _Init_Pushbutton_Trigger();
+
+    /* Disable Brownout Detector */
+    SUPC->SUPC_MR |= (uint32_t)(0xA5 << 24) | (0x01 << 13) ;
+
+    /* TODO2.1: Switch MCK to the fast RC oscillator */
+    //xxxx;
+    
+    /* TODO2.2: Set WKUP2 (IRQ pin) as the fast startup event */
+    //xxxx;
+
+    /* TODO2.3:  Entry in the Wait Mode: */
+    /* Set LPM bit */
+    //PMC->PMC_FSMR |= xxxx;;
+    /*Set FLPM bit */
+    //PMC->PMC_FSMR |= xxxx;;
+    /* Clear SLEEPDEEP bit */
+    //SCB->SCR &= xxx;
+    /* Set Flash Wait State at 0 */
+    //EFC->EEFC_FMR = (xx << 8);    
+    /* Set waitmode bit*/
+    //PMC->CKGR_MOR |= xxxx;
+    while( !(PMC->PMC_SR & PMC_SR_MCKRDY) );
+
+    /* Waiting for MOSCRCEN bit is cleared is strongly recommended
+    to ensure that the core will not execute undesired instructions */
+    while ( !(PMC->CKGR_MOR & CKGR_MOR_MOSCRCEN) ) ;
+
+}
+
+/**
+ * \brief Enter Sleep Mode */
+static void _EnterSleepMode( void )
+{
+    /* Initialize PIOs for low power */
+    _LowPower_Prepare();
+
+    /* Disable Brownout Detector */
+    SUPC->SUPC_MR |= (uint32_t)(0xA5 << 24) | (0x01 << 13);
+
+
+
+    /* Initialize PA2 as the wake-up interrupt */
+    _Init_Pushbutton_Trigger();
+
+    /* TODO3.1: Switch to the Fast RC Oscillator - 4MHz */
+    //xxxx;
+
+    /* TODO3.2: Entry in the Sleep Mode: */
+    /* Clear LPM bit */
+    //PMC->PMC_FSMR &= xxxx;
+    /* Clear SLEEPDEEP bit */
+    //SCB->SCR &= xxxx;
+    /* Execute __WFI() function */
+    //xxxx;
+
+    /* Waiting for MOSCRCEN bit is cleared is strongly recommended
+    to ensure that the core will not execute undesired instructions */
+    while ( !(PMC->CKGR_MOR & CKGR_MOR_MOSCRCEN) ) ;
+}
+static void Exit_LP_Mode(void)
+{
+    uint32_t temp;
+
+    /* Set FWS for Embedded Flash Access */
+    EFC0->EEFC_FMR = (6 << 8);
+    
+   /* Restore working clock */
+    if(config_clocks())
+      while(1); // stop in case of error
+
+    /* Enable Brownout Detector */
+    temp = SUPC->SUPC_MR & 0x00FFFFFF;
+    SUPC->SUPC_MR = (uint32_t)(0xA5 << 24) | (temp & (uint32_t)(~(0x01 << 13)));
+    
+    /* Disable interrupt on IRQ pin to avoid wrong detect */
+    if(interruptType==SLEEP_MODE) {
+    disable_interrupt(BRD_ID_PIO_SW0) ;
+        //Disable PA2 as interrupt source
+    BRD_BASE_PIO_SW0->PIO_IDR = BRD_SW0_MASK;
+    }
+
+    interruptType = ACTIVE_MODE;
+    Valid_DebugTrace( "* Low power mode exited *\n\r");
+
+    /* Init interrupt on BP2 pin to switch in Low Power mode */
+    _Init_Pushbutton_Trigger();
+}
+// -----------------------------------------------------------------------------
 //  Function Name       : run_menu
 //  Object              : 
 // -----------------------------------------------------------------------------
@@ -202,7 +445,7 @@ void run_menu(void)
 {
   
    volatile int keep_dummy_table = dummy_table[0];
-   memset(dummy_table,0x40,sizeof(dummy_table));
+   memset((void *) dummy_table,0x40,sizeof(dummy_table));
    
    Print_device_info();
    Print_menu();
@@ -219,43 +462,80 @@ void run_menu(void)
         MenuChoice = 0;
    while (1)
    {
-      switch (MenuChoice)
-      {
-         case '0':
-                  // --------------- Menu option 0
-                  menu_option_0();
-                  MenuChoice=0;
-                  Print_menu();
- 	 break;
-         
-         case '1':
-                  // --------------- Menu option 1
-                  menu_option_1();
-                  MenuChoice=0;
-                  Print_menu();
- 	 break;
-       
-         case '2':
-                  // --------------- Menu option 2
-                  menu_option_2();
-                  MenuChoice=0;
-                  Print_menu();
- 	 break;
-
-        
-         case 0:
-                // -- loop ---------------------
- 	        break;
-
-         default:
-                  // --------------- Error message
-                  DEBUG_Printk("\n\r\n\r");
-                  DEBUG_Printk("  =========== Not a valid option ========\n\r");
-                  DEBUG_Printk("\n\r");
-                  //DEBUG_Printk("  =========== Press a key ===============\n\r");
-                  MenuChoice=0;
-                  Print_menu();
-         break;//default
-      }// switch
+         switch (MenuChoice)
+         {
+           case '0':
+               // --------------- Menu option 0
+               menu_option_0();
+               MenuChoice=0;
+               Print_menu();
+               break;
+               
+           case '1':
+               // --------------- Menu option 1
+               menu_option_1();
+               MenuChoice=0;
+               Print_menu();
+               break;
+               
+           case '2':
+               // --------------- Menu option 2
+               menu_option_2();
+               MenuChoice=0;
+               Print_menu();
+               break;
+               
+           case '3':
+               // --------------- Menu option 2
+               menu_option_3();
+               MenuChoice=0;
+               break;
+               
+           case '4':
+               // --------------- Menu option 2
+               menu_option_4();
+               MenuChoice=0;
+               break;
+               
+           case '5':
+               // --------------- Menu option 2
+               menu_option_5();
+               MenuChoice=0;
+               break;
+               
+           case '6':
+               // --------------- Menu option 2
+               menu_option_6();
+               MenuChoice=0;
+               break;
+               
+           case '7':
+               // --------------- Menu option 2
+               menu_option_7();
+               MenuChoice=0;
+               break;
+               
+           case '8':
+               // --------------- Menu option 2
+               menu_option_8();
+               MenuChoice=0;
+               Print_menu();
+               break;
+               
+               
+           case 0:
+               // -- loop ---------------------
+               break;
+               
+           default:
+               // --------------- Error message
+               DEBUG_Printk("\n\r\n\r");
+               DEBUG_Printk("  =========== Not a valid option ========\n\r");
+               DEBUG_Printk("\n\r");
+               //DEBUG_Printk("  =========== Press a key ===============\n\r");
+               MenuChoice=0;
+               Print_menu();
+               break;//default
+         }// switch
    }// while
 }

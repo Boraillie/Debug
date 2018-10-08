@@ -1,4 +1,5 @@
 *.pbi
+*.ewt
 *.cout
 *.dep
 *.wspos
@@ -19,3 +20,4 @@ SAM4S_V_ADC/compil/settings/SAM4S_V_ADC.FLASH.cspy.bat
 *.sim
 *.pbw
 *.linf
+settings/
