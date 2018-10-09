@@ -84,7 +84,7 @@
                 </option>
                 <option>
                     <name>OCDynDriverList</name>
-                    <state>JLINK_ID</state>
+                    <state>CMSISDAP_ID</state>
                 </option>
                 <option>
                     <name>OCLastSavedByProductVersion</name>
@@ -296,7 +296,7 @@
                 <option>
                     <name>CMSISDAPResetList</name>
                     <version>1</version>
-                    <state>10</state>
+                    <state>4</state>
                 </option>
                 <option>
                     <name>CMSISDAPHWResetDuration</name>
@@ -316,7 +316,7 @@
                 </option>
                 <option>
                     <name>CMSISDAPInterfaceRadio</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CMSISDAPInterfaceCmdLine</name>
@@ -433,7 +433,7 @@
                 </option>
                 <option>
                     <name>CMSISDAPSelectedCPUBehaviour</name>
-                    <state>0</state>
+                    <state></state>
                 </option>
                 <option>
                     <name>ICpuName</name>
@@ -1520,7 +1520,7 @@
                 </option>
                 <option>
                     <name>MemFile</name>
-                    <state>$TOOLKIT_DIR$\CONFIG\debugger\Atmel\iosam4s.ddf</state>
+                    <state>$TOOLKIT_DIR$\CONFIG\debugger\Microchip\ATSAM4SD32C.ddf</state>
                 </option>
                 <option>
                     <name>RunToEnable</name>
@@ -1564,7 +1564,7 @@
                 </option>
                 <option>
                     <name>OCLastSavedByProductVersion</name>
-                    <state>6.10.5.52324</state>
+                    <state>8.30.2.18207</state>
                 </option>
                 <option>
                     <name>UseFlashLoader</name>
@@ -1588,7 +1588,7 @@
                 </option>
                 <option>
                     <name>FlashLoadersV3</name>
-                    <state>$TOOLKIT_DIR$\config\flashloader\Atmel\SAM4S\SAM4S-flash.board</state>
+                    <state>$TOOLKIT_DIR$\config\flashloader\Microchip\sam4sd32\sam4sd32-flash.board</state>
                 </option>
                 <option>
                     <name>OCImagesSuppressCheck1</name>

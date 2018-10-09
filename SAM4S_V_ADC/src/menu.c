@@ -302,7 +302,11 @@ static void _LowPower_Prepare( void )
     
     
     /* TODO1.1: Disable all the peripheral clocks */
-    
+    PMC->PMC_PCDR0 = 0xFFFFFFFF ;
+    while ( (PMC->PMC_PCSR0 & 0xFFFFFFFF) != 0 ) ;
+
+    PMC->PMC_PCDR1 = 0xFFFFFFFF ;
+    while ( (PMC->PMC_PCSR1 & 0xFFFFFFFF) != 0 ) ;
     
 
     /* TODO1.2: Disable USB Clock */
