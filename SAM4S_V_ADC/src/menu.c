@@ -46,7 +46,7 @@ static uint32_t interruptType;
 
 
 // -----------------------------------------------------------------------------
-#define MENU_NB_OPTIONS     9 // max=10
+#define MENU_NB_OPTIONS     10 // max=10
 
 #if ( BUG_PRINTF == 1 )
   #define MENU_STRING_LENGTH 34
@@ -67,7 +67,8 @@ char menu_choice_msg[MENU_NB_OPTIONS][MENU_STRING_LENGTH]={\
                               " 5 -> Enter Backup mode ==\n\r",\
                               " 6 -> Enter wait mode ==\n\r",\
                               " 7 -> Enter Sleep mode ==\n\r",\
-                              " 8 -> Low Power Exit            \n\r"}; // Ensure the last line is always 34 char to garantee printf bug 
+                              " 8 -> Low Power Exit           \n\r",\
+                              " 9 -> Print memory info         \n\r"}; // Ensure the last line is always 34 char to garantee printf bug 
 //                          "====================MAXLENGTH====================
 // -----------------------------------------------------------------------------
 //  Function Name       : menu_option_xx
@@ -247,7 +248,7 @@ void get_and_check_chipid(uint32_t* chip_id, uint32_t* chip_exid)
 // -----------------------------------------------------------------------------
 //  Function Name       : Low poer mode librairie
 // -----------------------------------------------------------------------------
-/** Touchscreen IRQ pin handler */
+/**  IRQ pin handler */
 void PIOA_IrqHandler( )
 {
    uint32_t status;
@@ -271,6 +272,9 @@ void PIOA_IrqHandler( )
 static void _Init_Pushbutton_Trigger(void)
 {
     uint32_t cuttoff = 10;
+
+    disable_interrupt(BRD_ID_PIO_SW0);
+
     // then, we configure the PIO Lines
     pio_configure(PIOA,PIO_INPUT,BRD_SW0_MASK,PIO_PULLUP);
     
@@ -293,6 +297,9 @@ static void _LowPower_Prepare( void )
     
     /* Disable Systick interrupt */
     SysTick->CTRL=0x04;
+    
+    //write dummy table to check i memory stays on
+    memset((void *) dummy_table,0x60,sizeof(dummy_table));
 
     /* TODO1.1: Disable all the peripheral clocks */
     PMC->PMC_PCDR0 = 0xFFFFFFFF ;
@@ -336,7 +343,9 @@ static void _EnterBackupMode(void)
 //    _LowPower_Prepare();
    
     // initialize push button for state transition
-    _Init_Pushbutton_Trigger();
+//    _Init_Pushbutton_Trigger();
+      // then, we configure the PIO Lines
+    pio_configure(PIOA,PIO_INPUT,BRD_SW0_MASK,PIO_PULLUP);
    
     /* GPBR0 is for recording times of entering backup mode */
     GPBR->SYS_GPBR[0] += 1;
@@ -536,7 +545,14 @@ void run_menu(void)
                MenuChoice=0;
                Print_menu();
                break;
-               
+         case '9':
+           // --------------- Printf GPBR 0
+           sprintf(message,"GPBR0 Value: 0x%X\n\r",GPBR->SYS_GPBR[0]);DEBUG_Printk(message);
+           sprintf(message,"Dummy table  Value: 0x%X\n\r",dummy_table[0]);DEBUG_Printk(message);
+           
+           MenuChoice=0;
+           break;
+          
                
            case 0:
                // -- loop ---------------------
