@@ -313,6 +313,9 @@ static void _LowPower_Prepare( void )
     REG_PMC_SCDR = PMC_SCER_UDP;
 
    /* TODO1.3: Enable PIO function except on PA2 (IRQ pin) */
+    PIOA->PIO_PER = 0xFFFFFFFB;
+    PIOB->PIO_PER = 0xFFFFFFFF;
+    PIOC->PIO_PER = 0xFFFFFFFF;
 
     
    /* TODO1.4: Set all I/Os as Input except on PA2 (IRQ pin) */
