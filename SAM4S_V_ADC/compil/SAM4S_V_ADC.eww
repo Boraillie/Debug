@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\SAM4S_V_ADC.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>All</name>
+      <member>
+        <project>SpeedMemory</project>
+        <configuration>bin</configuration>
+      </member>
+      <member>
+        <project>SpeedMemory</project>
+        <configuration>Flash_debug</configuration>
+      </member>
+      <member>
+        <project>SpeedMemory</project>
+        <configuration>RAM_Debug</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+
