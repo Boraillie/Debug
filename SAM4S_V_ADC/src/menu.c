@@ -348,11 +348,11 @@ static void _EnterBackupMode(void)
     GPBR->SYS_GPBR[0] += 1;
 
     /* TODO4.1: Enable the PA2 IRQ pin as the wake-up source */
+    SUPC->SUPC_WUIR = SUPC_WUIR_WKUPT2_LOW | BRD_SW0_WKUP_MASK;
 
     /* TOD4.2: Entry in the Backup Mode: */
     /* Set SLEEPDEEP bit */
-
-    
+    SCB->SCR |= SCR_SLEEPDEEP;
     /* Set VROFF bit  */
     SUPC->SUPC_CR |= (SUPC_CR_KEY(0xA5) | SUPC_CR_VROFF_STOP_VREG);
 }
