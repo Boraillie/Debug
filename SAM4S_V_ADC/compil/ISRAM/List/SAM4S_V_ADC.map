@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.30.2.160/W32 for ARM                  15/Oct/2018  17:33:03
+# IAR ELF Linker V8.30.2.160/W32 for ARM                  15/Oct/2018  18:09:41
 # Copyright 2007-2018 IAR Systems AB.
 #
 #    Output file  =  
@@ -8,7 +8,7 @@
 #    Map file     =  
 #        D:\Documents\Cours\EMSE\3A\Embedded_Systems\Debug\TP4_advanced_debug\advanced_debug\SAM4S_V_ADC\compil\ISRAM\List\SAM4S_V_ADC.map
 #    Command line =  
-#        -f C:\Users\Cyril\AppData\Local\Temp\EW1FB7.tmp
+#        -f C:\Users\Cyril\AppData\Local\Temp\EWA9D3.tmp
 #        (D:\Documents\Cours\EMSE\3A\Embedded_Systems\Debug\TP4_advanced_debug\advanced_debug\SAM4S_V_ADC\compil\ISRAM\Obj\IAR_SAM3S_cstartup.o
 #        D:\Documents\Cours\EMSE\3A\Embedded_Systems\Debug\TP4_advanced_debug\advanced_debug\SAM4S_V_ADC\compil\ISRAM\Obj\main.o
 #        D:\Documents\Cours\EMSE\3A\Embedded_Systems\Debug\TP4_advanced_debug\advanced_debug\SAM4S_V_ADC\compil\ISRAM\Obj\menu.o
@@ -79,7 +79,7 @@ initialize by copy { rw };
   .intvec                 const    0x2000'0000    0xcc  IAR_SAM3S_cstartup.o [1]
                                  - 0x2000'00cc    0xcc
 
-"P1":                                           0x1f1d
+"P1":                                           0x1f29
   .text                   ro code  0x2000'00cc   0x748  menu.o [1]
   .text                   ro code  0x2000'0814    0x94  v_debug.o [1]
   .text                   ro code  0x2000'08a8     0xc  rstc.o [1]
@@ -113,62 +113,62 @@ initialize by copy { rw };
                           ro code  0x2000'1634    0x70  v_nvic.o [1]
   .text                   ro code  0x2000'16a4    0x36  strlen.o [3]
   .text                   ro code  0x2000'16da     0x2  IAR_SAM3S_cstartup.o [1]
-  .text                   ro code  0x2000'16dc   0x190  main.o [1]
+  .text                   ro code  0x2000'16dc   0x19c  main.o [1]
   .prg_used_utils_functions
-                          ro code  0x2000'186c    0x28  v_relocate.o [1]
-  .rodata                 const    0x2000'1894    0x98  v_utils.o [1]
-  .text                   ro code  0x2000'192c    0x80  IAR_SAM3S_cstartup.o [1]
-  .rodata                 const    0x2000'19ac    0x40  menu.o [1]
-  .rodata                 const    0x2000'19ec    0x40  menu.o [1]
-  .rodata                 const    0x2000'1a2c    0x3c  menu.o [1]
-  .rodata                 const    0x2000'1a68    0x38  menu.o [1]
-  .rodata                 const    0x2000'1aa0    0x34  menu.o [1]
-  .rodata                 const    0x2000'1ad4    0x30  menu.o [1]
-  .rodata                 const    0x2000'1b04    0x30  menu.o [1]
-  .rodata                 const    0x2000'1b34    0x2c  menu.o [1]
-  .rodata                 const    0x2000'1b60    0x2c  menu.o [1]
-  .rodata                 const    0x2000'1b8c    0x2c  menu.o [1]
-  .rodata                 const    0x2000'1bb8    0x2c  menu.o [1]
-  .rodata                 const    0x2000'1be4    0x28  menu.o [1]
-  .rodata                 const    0x2000'1c0c    0x28  menu.o [1]
-  .text                   ro code  0x2000'1c34    0x28  data_init.o [3]
-  .rodata                 const    0x2000'1c5c    0x24  main.o [1]
-  .rodata                 const    0x2000'1c80    0x24  main.o [1]
-  .rodata                 const    0x2000'1ca4    0x24  menu.o [1]
-  .rodata                 const    0x2000'1cc8    0x24  menu.o [1]
-  .rodata                 const    0x2000'1cec    0x24  menu.o [1]
-  .rodata                 const    0x2000'1d10    0x24  menu.o [1]
-  .rodata                 const    0x2000'1d34    0x24  menu.o [1]
-  .iar.init_table         const    0x2000'1d58    0x38  - Linker created -
-  .text                   ro code  0x2000'1d90    0x1e  cmain.o [3]
-  .text                   ro code  0x2000'1dae     0x4  exit.o [2]
-  .text                   ro code  0x2000'1db2     0x2  IAR_SAM3S_cstartup.o [1]
-  .text                   ro code  0x2000'1db4     0xa  cexit.o [3]
+                          ro code  0x2000'1878    0x28  v_relocate.o [1]
+  .rodata                 const    0x2000'18a0    0x98  v_utils.o [1]
+  .text                   ro code  0x2000'1938    0x80  IAR_SAM3S_cstartup.o [1]
+  .rodata                 const    0x2000'19b8    0x40  menu.o [1]
+  .rodata                 const    0x2000'19f8    0x40  menu.o [1]
+  .rodata                 const    0x2000'1a38    0x3c  menu.o [1]
+  .rodata                 const    0x2000'1a74    0x38  menu.o [1]
+  .rodata                 const    0x2000'1aac    0x34  menu.o [1]
+  .rodata                 const    0x2000'1ae0    0x30  menu.o [1]
+  .rodata                 const    0x2000'1b10    0x30  menu.o [1]
+  .rodata                 const    0x2000'1b40    0x2c  menu.o [1]
+  .rodata                 const    0x2000'1b6c    0x2c  menu.o [1]
+  .rodata                 const    0x2000'1b98    0x2c  menu.o [1]
+  .rodata                 const    0x2000'1bc4    0x2c  menu.o [1]
+  .rodata                 const    0x2000'1bf0    0x28  menu.o [1]
+  .rodata                 const    0x2000'1c18    0x28  menu.o [1]
+  .text                   ro code  0x2000'1c40    0x28  data_init.o [3]
+  .rodata                 const    0x2000'1c68    0x24  main.o [1]
+  .rodata                 const    0x2000'1c8c    0x24  main.o [1]
+  .rodata                 const    0x2000'1cb0    0x24  menu.o [1]
+  .rodata                 const    0x2000'1cd4    0x24  menu.o [1]
+  .rodata                 const    0x2000'1cf8    0x24  menu.o [1]
+  .rodata                 const    0x2000'1d1c    0x24  menu.o [1]
+  .rodata                 const    0x2000'1d40    0x24  menu.o [1]
+  .iar.init_table         const    0x2000'1d64    0x38  - Linker created -
+  .text                   ro code  0x2000'1d9c    0x1e  cmain.o [3]
+  .text                   ro code  0x2000'1dba     0x4  exit.o [2]
   .text                   ro code  0x2000'1dbe     0x2  IAR_SAM3S_cstartup.o [1]
-  .text                   ro code  0x2000'1dc0     0xc  XXexit.o [3]
-  .rodata                 const    0x2000'1dcc    0x1c  menu.o [1]
-  .rodata                 const    0x2000'1de8    0x1c  menu.o [1]
-  .rodata                 const    0x2000'1e04    0x1c  menu.o [1]
-  .rodata                 const    0x2000'1e20    0x18  menu.o [1]
-  .rodata                 const    0x2000'1e38    0x14  menu.o [1]
-  .rodata                 const    0x2000'1e4c    0x14  menu.o [1]
-  .rodata                 const    0x2000'1e60    0x14  menu.o [1]
-  .rodata                 const    0x2000'1e74    0x10  menu.o [1]
-  .rodata                 const    0x2000'1e84    0x10  menu.o [1]
-  .text                   ro code  0x2000'1e94     0xc  cstartup_M.o [3]
-  .rodata                 const    0x2000'1ea0     0x8  main.o [1]
-  .rodata                 const    0x2000'1ea8     0x8  main.o [1]
-  .rodata                 const    0x2000'1eb0     0x8  menu.o [1]
-  .text                   ro code  0x2000'1eb8     0x2  IAR_SAM3S_cstartup.o [1]
-  .text                   ro code  0x2000'1eba     0x2  IAR_SAM3S_cstartup.o [1]
-  .text                   ro code  0x2000'1ebc     0x2  IAR_SAM3S_cstartup.o [1]
-  .text                   ro code  0x2000'1ebe     0x2  IAR_SAM3S_cstartup.o [1]
-  .text                   ro code  0x2000'1ec0     0x2  IAR_SAM3S_cstartup.o [1]
-  .rodata                 const    0x2000'1ec2     0x0  zero_init3.o [3]
-  .rodata                 const    0x2000'1ec2     0x0  lz77_init_single.o [3]
-  Initializer bytes       const    0x2000'1ec2    0xe3  <for Absolute sections 1-1>
-  Initializer bytes       const    0x2000'1fa5    0x44  <for P2-1>
-                                 - 0x2000'1fe9  0x1f1d
+  .text                   ro code  0x2000'1dc0     0xa  cexit.o [3]
+  .text                   ro code  0x2000'1dca     0x2  IAR_SAM3S_cstartup.o [1]
+  .text                   ro code  0x2000'1dcc     0xc  XXexit.o [3]
+  .rodata                 const    0x2000'1dd8    0x1c  menu.o [1]
+  .rodata                 const    0x2000'1df4    0x1c  menu.o [1]
+  .rodata                 const    0x2000'1e10    0x1c  menu.o [1]
+  .rodata                 const    0x2000'1e2c    0x18  menu.o [1]
+  .rodata                 const    0x2000'1e44    0x14  menu.o [1]
+  .rodata                 const    0x2000'1e58    0x14  menu.o [1]
+  .rodata                 const    0x2000'1e6c    0x14  menu.o [1]
+  .rodata                 const    0x2000'1e80    0x10  menu.o [1]
+  .rodata                 const    0x2000'1e90    0x10  menu.o [1]
+  .text                   ro code  0x2000'1ea0     0xc  cstartup_M.o [3]
+  .rodata                 const    0x2000'1eac     0x8  main.o [1]
+  .rodata                 const    0x2000'1eb4     0x8  main.o [1]
+  .rodata                 const    0x2000'1ebc     0x8  menu.o [1]
+  .text                   ro code  0x2000'1ec4     0x2  IAR_SAM3S_cstartup.o [1]
+  .text                   ro code  0x2000'1ec6     0x2  IAR_SAM3S_cstartup.o [1]
+  .text                   ro code  0x2000'1ec8     0x2  IAR_SAM3S_cstartup.o [1]
+  .text                   ro code  0x2000'1eca     0x2  IAR_SAM3S_cstartup.o [1]
+  .text                   ro code  0x2000'1ecc     0x2  IAR_SAM3S_cstartup.o [1]
+  .rodata                 const    0x2000'1ece     0x0  zero_init3.o [3]
+  .rodata                 const    0x2000'1ece     0x0  lz77_init_single.o [3]
+  Initializer bytes       const    0x2000'1ece    0xe3  <for Absolute sections 1-1>
+  Initializer bytes       const    0x2000'1fb1    0x44  <for P2-1>
+                                 - 0x2000'1ff5  0x1f29
 
 "A0":                                             0x1c
   .info_section           const    0x2000'7fe0     0xc  main.o [1]
@@ -211,7 +211,7 @@ Unused ranges:
 
          From           To      Size
          ----           --      ----
-  0x2000'1fe9  0x2000'7fdf    0x5ff7
+  0x2000'1ff5  0x2000'7fdf    0x5feb
   0x2000'8198  0x2000'81ff      0x68
   0x2000'8390  0x2000'83ff      0x70
   0x2000'8d30  0x2001'ffff  0x1'72d0
@@ -230,13 +230,13 @@ Zero (__iar_zero_init3)
 
 Copy/lz77 (__iar_lz77_init_single3)
     1 source range, total size 0xe3 (55% of destination):
-          0x2000'1ec2   0xe3
+          0x2000'1ece   0xe3
     1 destination range, total size 0x198:
           0x2000'8000  0x198
 
 Copy/lz77 (__iar_lz77_init_single3)
     1 source range, total size 0x44 (33% of destination):
-          0x2000'1fa5   0x44
+          0x2000'1fb1   0x44
     1 destination range, total size 0xcc:
           0x2000'8400   0xcc
 
@@ -256,7 +256,7 @@ command line/config:
 
 D:\Documents\Cours\EMSE\3A\Embedded_Systems\Debug\TP4_advanced_debug\advanced_debug\SAM4S_V_ADC\compil\ISRAM\Obj: [1]
     IAR_SAM3S_cstartup.o         146      272      204
-    main.o                       400      112        8
+    main.o                       412      112        8
     menu.o                     1 864    1 263       92      808
     pio.o                        454
     pmc.o                        620
@@ -272,7 +272,7 @@ D:\Documents\Cours\EMSE\3A\Embedded_Systems\Debug\TP4_advanced_debug\advanced_de
     v_utils.o                    786      152
     v_wdt.o                      124
     -----------------------------------------------------------
-    Total:                     5 502    1 799      304      808
+    Total:                     5 514    1 799      304      808
 
 dl7M_tln.a: [2]
     exit.o                         4
@@ -298,7 +298,7 @@ rt7M_tl.a: [3]
     Gaps                                    4
     Linker created                         56    2 048
 ---------------------------------------------------------------
-    Grand Total:               6 338    1 863    2 352      808
+    Grand Total:               6 350    1 863    2 352      808
 
 
 *******************************************************************************
@@ -307,15 +307,15 @@ rt7M_tl.a: [3]
 
 Entry                       Address   Size  Type      Object
 -----                       -------   ----  ----      ------
-.iar.init_table$$Base   0x2000'1d58          --   Gb  - Linker created -
-.iar.init_table$$Limit  0x2000'1d90          --   Gb  - Linker created -
-?main                   0x2000'1d91         Code  Gb  cmain.o [3]
+.iar.init_table$$Base   0x2000'1d64          --   Gb  - Linker created -
+.iar.init_table$$Limit  0x2000'1d9c          --   Gb  - Linker created -
+?main                   0x2000'1d9d         Code  Gb  cmain.o [3]
 CSTACK$$Base            0x2000'8530          --   Gb  - Linker created -
 CSTACK$$Limit           0x2000'8d30          --   Gb  - Linker created -
 DEBUG_Initialize        0x2000'084b   0x56  Code  Gb  v_debug.o [1]
 DEBUG_Printk            0x2000'0823   0x28  Code  Gb  v_debug.o [1]
 DEBUG_Ready             0x2000'0815    0xe  Code  Gb  v_debug.o [1]
-Dummy_Handler           0x2000'19a9    0x2  Code  Gb  IAR_SAM3S_cstartup.o [1]
+Dummy_Handler           0x2000'19b5    0x2  Code  Gb  IAR_SAM3S_cstartup.o [1]
 Exit_LP_Mode            0x2000'055d   0x54  Code  Lc  menu.o [1]
 MCK_clock_speed         0x2000'851c    0x4  Data  Gb  main.o [1]
 MenuChoice              0x2000'8524    0x4  Data  Gb  menu.o [1]
@@ -323,8 +323,8 @@ PIOA_IrqHandler         0x2000'0321   0x4c  Code  Gb  menu.o [1]
 PIO_Init                0x2000'16dd   0x66  Code  Gb  main.o [1]
 Print_device_info       0x2000'0253   0x7a  Code  Gb  menu.o [1]
 Print_menu              0x2000'0219   0x3a  Code  Gb  menu.o [1]
-Region$$Table$$Base     0x2000'1d58          --   Gb  - Linker created -
-Region$$Table$$Limit    0x2000'1d90          --   Gb  - Linker created -
+Region$$Table$$Base     0x2000'1d64          --   Gb  - Linker created -
+Region$$Table$$Limit    0x2000'1d9c          --   Gb  - Linker created -
 UART1_IrqHandler        0x2000'0201   0x18  Code  Gb  menu.o [1]
 _EnterBackupMode        0x2000'0437   0x3e  Code  Lc  menu.o [1]
 _EnterSleepMode         0x2000'04ff   0x5a  Code  Lc  menu.o [1]
@@ -340,21 +340,21 @@ __aeabi_memset          0x2000'0ef5         Code  Gb  ABImemset.o [3]
 __checksum              0x2000'7ffc    0x4  Data  Gb  Place holder __checksum
 __checksum_begin {Abs}  0x2000'0000         Data  Gb  <internal module>
 __checksum_end {Abs}    0x2000'7fdf         Data  Gb  <internal module>
-__cmain                 0x2000'1d91         Code  Gb  cmain.o [3]
-__exit                  0x2000'1dc1         Code  Gb  XXexit.o [3]
+__cmain                 0x2000'1d9d         Code  Gb  cmain.o [3]
+__exit                  0x2000'1dcd         Code  Gb  XXexit.o [3]
 __iar_Memset            0x2000'0ef5         Code  Gb  ABImemset.o [3]
 __iar_Memset_word       0x2000'0efd         Code  Gb  ABImemset.o [3]
-__iar_data_init3        0x2000'1c35   0x28  Code  Gb  data_init.o [3]
+__iar_data_init3        0x2000'1c41   0x28  Code  Gb  data_init.o [3]
 __iar_lz77_init_single3
                         0x2000'0a7b   0x7a  Code  Gb  lz77_init_single.o [3]
-__iar_program_start     0x2000'1e95         Code  Gb  cstartup_M.o [3]
+__iar_program_start     0x2000'1ea1         Code  Gb  cstartup_M.o [3]
 __iar_zero_init3        0x2000'0bc3   0x3a  Code  Gb  zero_init3.o [3]
-__low_level_init        0x2000'192d   0x5e  Code  Gb  IAR_SAM3S_cstartup.o [1]
+__low_level_init        0x2000'1939   0x5e  Code  Gb  IAR_SAM3S_cstartup.o [1]
 __vector_table          0x2000'0000   0xcc  Data  Gb  IAR_SAM3S_cstartup.o [1]
-_call_main              0x2000'1d9d         Code  Gb  cmain.o [3]
+_call_main              0x2000'1da9         Code  Gb  cmain.o [3]
 _date                   0x2000'7fe0    0xc  Data  Gb  main.o [1]
-_exit                   0x2000'1db5         Code  Gb  cexit.o [3]
-_main                   0x2000'1dab         Code  Gb  cmain.o [3]
+_exit                   0x2000'1dc1         Code  Gb  cexit.o [3]
+_main                   0x2000'1db7         Code  Gb  cmain.o [3]
 _time                   0x2000'7ff0    0xc  Data  Gb  main.o [1]
 binary_tag              0x2000'8520    0x4  Data  Gb  main.o [1]
 brownout_detector_enable
@@ -364,13 +364,13 @@ config_clocks           0x2000'0f69   0x28  Code  Gb  v_utils.o [1]
 disable_interrupt       0x2000'0ee9    0xc  Code  Gb  v_it_management.o [1]
 dummy_table             0x2000'8200  0x190  Data  Gb  menu.o [1]
 enable_interrupt        0x2000'0edd    0xc  Code  Gb  v_it_management.o [1]
-exit                    0x2000'1daf    0x4  Code  Gb  exit.o [2]
+exit                    0x2000'1dbb    0x4  Code  Gb  exit.o [2]
 external_reset_disable  0x2000'0c05    0xa  Code  Gb  v_utils.o [1]
 external_reset_enable   0x2000'0bfd    0x8  Code  Gb  v_utils.o [1]
 get_and_check_chipid    0x2000'02cd   0x50  Code  Gb  menu.o [1]
 interruptType           0x2000'852c    0x4  Data  Lc  menu.o [1]
 lowPowerMode            0x2000'8528    0x4  Data  Lc  menu.o [1]
-main                    0x2000'1797   0x98  Code  Gb  main.o [1]
+main                    0x2000'1797   0x9e  Code  Gb  main.o [1]
 menu_choice_msg         0x2000'8000  0x198  Data  Gb  menu.o [1]
 menu_option_0           0x2000'00d1   0x1e  Code  Gb  menu.o [1]
 menu_option_1           0x2000'00ef   0x2e  Code  Gb  menu.o [1]
@@ -412,8 +412,8 @@ pmc_switch_pck_to_mainck
                         0x2000'1359   0x32  Code  Gb  pmc.o [1]
 pmc_switch_pck_to_mck   0x2000'1481   0x3c  Code  Gb  v_pmc.o [1]
 pmc_switch_pck_to_sclk  0x2000'132b   0x2e  Code  Gb  pmc.o [1]
-relocate_int_table      0x2000'186d   0x28  Code  Gb  v_relocate.o [1]
-reset_source_msg        0x2000'1894   0x98  Data  Gb  v_utils.o [1]
+relocate_int_table      0x2000'1879   0x28  Code  Gb  v_relocate.o [1]
+reset_source_msg        0x2000'18a0   0x98  Data  Gb  v_utils.o [1]
 rstc_software_reset     0x2000'08a9    0xc  Code  Gb  rstc.o [1]
 run_menu                0x2000'05b5  0x13a  Code  Gb  menu.o [1]
 set_PCK_output          0x2000'1743   0x54  Code  Gb  main.o [1]
@@ -474,7 +474,7 @@ wdt_enable              0x2000'112d   0x6c  Code  Gb  v_wdt.o [1]
 [2] = dl7M_tln.a
 [3] = rt7M_tl.a
 
-  6 338 bytes of readonly  code memory
+  6 350 bytes of readonly  code memory
   1 863 bytes of readonly  data memory
   2 352 bytes of readwrite data memory (+ 808 absolute)
 
