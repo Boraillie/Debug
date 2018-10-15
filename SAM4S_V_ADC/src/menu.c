@@ -32,7 +32,7 @@ char message[80];
 unsigned int MenuChoice;
 extern unsigned int MCK_clock_speed;       // main.c
 extern const char reset_source_msg[7][10]; // v_utils.c
-#pragma location = 0x200080cc
+#pragma location = 0x20008200
 uint32_t dummy_table[100]={0};
 
 /*----------------------------------------------------------------------------
@@ -46,20 +46,18 @@ static uint32_t interruptType;
 
 
 // -----------------------------------------------------------------------------
-#define MENU_NB_OPTIONS     10 // max=10
+#define MENU_NB_OPTIONS     12 //
 
-#if ( BUG_PRINTF == 1 )
+
   #define MENU_STRING_LENGTH 34
   #pragma location = 0x20008000
-#else 
-  #define MENU_STRING_LENGTH 40
-#endif
+
 
 
 
 char menu_choice_msg[MENU_NB_OPTIONS][MENU_STRING_LENGTH]={\
   //                          "====================MAXLENGTH===================
-                              " 0 -> Perform a Software Reset  \n\r",\
+                              " 0 -> Perform a Software Reset \n\r",\
                               " 1 -> Turn off D0 LED \n\r",\
                               " 2 -> Turn on D0 LED   \n\r",\
                               " 3 -> Get SW0 state \n\r",\
@@ -67,8 +65,9 @@ char menu_choice_msg[MENU_NB_OPTIONS][MENU_STRING_LENGTH]={\
                               " 5 -> Enter Backup mode ==\n\r",\
                               " 6 -> Enter wait mode ==\n\r",\
                               " 7 -> Enter Sleep mode ==\n\r",\
-                              " 8 -> Low Power Exit           \n\r",\
-                              " 9 -> Print memory info         \n\r"}; // Ensure the last line is always 34 char to garantee printf bug 
+                              " 8 -> Low Power Exit        \n\r",\
+                              " 9 -> Print memory info     \n\r",\
+                              " a -> Init Push button    \n\r"}; // Ensure the last line is always 34 char to garantee printf bug 
 //                          "====================MAXLENGTH====================
 // -----------------------------------------------------------------------------
 //  Function Name       : menu_option_xx
@@ -281,18 +280,10 @@ static void _Init_Pushbutton_Trigger(void)
     //1: The interrupt source is described by the registers PIO_ELSR and PIO_FRLHSR
     PIOA->PIO_AIMER  = BRD_SW0_MASK;
 
-#ifdef IT_PIO_L1_BUG    
+ 
     PIOA->PIO_LSR = BRD_SW0_MASK;
     PIOA->PIO_REHLSR = BRD_SW0_MASK;
-#elif IT_PIO_L2_BUG
-    PIOA->PIO_LSR = BRD_SW0_MASK;
-#else
-    PIOA->PIO_ESR = BRD_SW0_MASK;
-    // PIO SetDebounce Filter cuttoff = 10 Hz
-    BRD_BASE_PIO_SW0->PIO_IFSCER = BRD_SW0_MASK; /* set Debouncing, 0 bit field no effect */
-    BRD_BASE_PIO_SW0->PIO_SCDR = ((32678/(2*(cuttoff))) - 1) & 0x3FFF; //\TODO: Check the formula
-    PIOA->PIO_FELLSR = BRD_SW0_MASK;
-#endif
+
     
     
     
