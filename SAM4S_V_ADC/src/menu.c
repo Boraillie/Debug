@@ -277,10 +277,26 @@ static void _Init_Pushbutton_Trigger(void)
 
     // then, we configure the PIO Lines
     pio_configure(PIOA,PIO_INPUT,BRD_SW0_MASK,PIO_PULLUP);
-    
+    //0: The interrupt source is a both-edge detection event. /
+    //1: The interrupt source is described by the registers PIO_ELSR and PIO_FRLHSR
+    PIOA->PIO_AIMER  = BRD_SW0_MASK;
+
+#ifdef IT_PIO_L1_BUG    
+    PIOA->PIO_LSR = BRD_SW0_MASK;
+    PIOA->PIO_REHLSR = BRD_SW0_MASK;
+#elif IT_PIO_L2_BUG
+    PIOA->PIO_LSR = BRD_SW0_MASK;
+#else
+    PIOA->PIO_ESR = BRD_SW0_MASK;
     // PIO SetDebounce Filter cuttoff = 10 Hz
     BRD_BASE_PIO_SW0->PIO_IFSCER = BRD_SW0_MASK; /* set Debouncing, 0 bit field no effect */
     BRD_BASE_PIO_SW0->PIO_SCDR = ((32678/(2*(cuttoff))) - 1) & 0x3FFF; //\TODO: Check the formula
+    PIOA->PIO_FELLSR = BRD_SW0_MASK;
+#endif
+    
+    
+    
+    
     
     //Enable PA2 as interrupt source
    BRD_BASE_PIO_SW0->PIO_IER = BRD_SW0_MASK;
@@ -298,7 +314,7 @@ static void _LowPower_Prepare( void )
     /* Disable Systick interrupt */
     SysTick->CTRL=0x04;
     
-    //write dummy table to check i memory stays on
+    //write dummy table to check that memory stays on
     memset((void *) dummy_table,0x60,sizeof(dummy_table));
 
     /* TODO1.1: Disable all the peripheral clocks */
@@ -553,6 +569,13 @@ void run_menu(void)
            MenuChoice=0;
            break;
           
+         case 'a':
+           // --------------- Init push button           
+           _Init_Pushbutton_Trigger();
+           DEBUG_Printk("Push button initialized correctly\n\r");
+           MenuChoice=0;
+           break;
+
                
            case 0:
                // -- loop ---------------------

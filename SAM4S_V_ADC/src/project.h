@@ -118,8 +118,8 @@
 //BUG LIST 
 #define BUG_WDT                         (0)
 #define BUG_PRINTF                      (0)
-
-
+#define IT_PIO_L1_BUG                   (0)
+#define IT_PIO_L2_BUG                   (0)
 
 
 
