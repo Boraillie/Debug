@@ -280,9 +280,9 @@ static void _Init_Pushbutton_Trigger(void)
     //1: The interrupt source is described by the registers PIO_ELSR and PIO_FRLHSR
     PIOA->PIO_AIMER  = BRD_SW0_MASK;
 
- 
-    PIOA->PIO_LSR = BRD_SW0_MASK;
-    PIOA->PIO_REHLSR = BRD_SW0_MASK;
+    pio_set_debounce_filter(PIOA, BRD_SW0_MASK, PIO_PULLUP);
+    PIOA->PIO_ESR = BRD_SW0_MASK;
+    PIOA->PIO_FELLSR = BRD_SW0_MASK;
 
     
     
